@@ -35,21 +35,34 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'email' => 'required|email|unique:users',
+            'password' => ['required', 'confirmed'],
+            'name' => 'required',
+        ],[
+            'email.required' => 'يجب ادخال البريد الالكتروني',
+            'email.email' => 'البريد الالكتروني المدخل غير صحيح',
+            'email.unique' => 'البريد الالكتروني مسجل من قبل',
+            'password.required' => 'يجب ادخال كلمة المرور',
+            'password.confirmed' => 'كلمة المرور غير متطابقة',
+            'name.required' => 'يجب ادخال الاسم الاول',
         ]);
 
         $user = User::create([
-            'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'name' => $request->fname,
+            'note' => $request->note,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'country' => $request->country,
+            'pos' => $request->pos,
+            'status' => $request->status,
         ]);
 
         event(new Registered($user));
 
-        Auth::login($user);
+        // Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->route('login');
     }
 }

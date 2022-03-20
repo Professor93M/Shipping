@@ -1359,6 +1359,9 @@ input:checked + .toggle-bg {
 .font-tajawal-regular {
   font-family: Tajawal-Regular;
 }
+.font-tajawal-light {
+  font-family: Tajawal-Light;
+}
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -1387,6 +1390,9 @@ input:checked + .toggle-bg {
 }
 .font-semibold {
   font-weight: 600;
+}
+.font-bold {
+  font-weight: 700;
 }
 .uppercase {
   text-transform: uppercase;

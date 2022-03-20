@@ -17,7 +17,6 @@ export default function Register({ auth }) {
         phone: "",
         address: "",
         country: "",
-        state: "",
         pos: "",
     });
 
@@ -109,10 +108,10 @@ export default function Register({ auth }) {
                     handleChange={handleChange}
                 />
                 <FormItem
-                    name="countery"
+                    name="country"
                     type="text"
                     label="البلد"
-                    forInput="countery"
+                    forInput="country"
                     required
                     placeholder=" "
                     handleChange={handleChange}

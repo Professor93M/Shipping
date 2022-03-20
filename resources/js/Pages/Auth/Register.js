@@ -10,20 +10,20 @@ import Combo from "@/Components/Combo";
 export default function Register({ auth }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: "",
-        lastname: "",
         email: "",
         password: "",
+        password_confirmation: "",
         sname: "",
         phone: "",
         address: "",
         country: "",
         state: "",
-        position: "",
+        pos: "",
     });
 
     useEffect(() => {
         return () => {
-            reset("password", "password_confirmation");
+            reset("password");
         };
     }, []);
 
@@ -40,7 +40,7 @@ export default function Register({ auth }) {
         Inertia.get("/");
     };
 
-    const positions = [
+    const poss = [
         {
             name: "إدارة",
         },
@@ -72,7 +72,6 @@ export default function Register({ auth }) {
                     placeholder=" "
                     handleChange={handleChange}
                 />
-
                 <FormItem
                     name="email"
                     type="email"
@@ -87,6 +86,15 @@ export default function Register({ auth }) {
                     type="password"
                     label="كلمة المرور"
                     forInput="password"
+                    required
+                    placeholder=" "
+                    handleChange={handleChange}
+                />
+                <FormItem
+                    name="password_confirmation"
+                    type="password"
+                    label="تأكيد كلمة المرور"
+                    forInput="password_confirmation"
                     required
                     placeholder=" "
                     handleChange={handleChange}
@@ -115,9 +123,9 @@ export default function Register({ auth }) {
                             className={
                                 "block w-full text-sm text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-default focus:outline-none focus:ring-0 font-semibold focus:border-dark peer"
                             }
-                            name="position"
+                            name="pos"
                             add
-                            options={positions}
+                            options={poss}
                             placeholder="المسمى الوظيفي"
                             handleChange={(e) => {
                                 handleChange(e);

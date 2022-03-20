@@ -3018,15 +3018,15 @@ function Register(_ref) {
 
   var _useForm = (0,_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_5__.useForm)({
     name: "",
-    lastname: "",
     email: "",
     password: "",
+    password_confirmation: "",
     sname: "",
     phone: "",
     address: "",
     country: "",
     state: "",
-    position: ""
+    pos: ""
   }),
       data = _useForm.data,
       setData = _useForm.setData,
@@ -3037,7 +3037,7 @@ function Register(_ref) {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     return function () {
-      reset("password", "password_confirmation");
+      reset("password");
     };
   }, []);
 
@@ -3049,7 +3049,7 @@ function Register(_ref) {
     _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_6__.Inertia.get("/");
   };
 
-  var positions = [{
+  var poss = [{
     name: "إدارة"
   }, {
     name: "سائق"
@@ -3094,6 +3094,14 @@ function Register(_ref) {
         placeholder: " ",
         handleChange: _handleChange
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Components_FormItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        name: "password_confirmation",
+        type: "password",
+        label: "\u062A\u0623\u0643\u064A\u062F \u0643\u0644\u0645\u0629 \u0627\u0644\u0645\u0631\u0648\u0631",
+        forInput: "password_confirmation",
+        required: true,
+        placeholder: " ",
+        handleChange: _handleChange
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Components_FormItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
         name: "address",
         type: "text",
         label: "\u0627\u0644\u0639\u0646\u0648\u0627\u0646",
@@ -3112,9 +3120,9 @@ function Register(_ref) {
       }), auth.user && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Components_FormItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Components_Combo__WEBPACK_IMPORTED_MODULE_7__["default"], {
           className: "block w-full text-sm text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-default focus:outline-none focus:ring-0 font-semibold focus:border-dark peer",
-          name: "position",
+          name: "pos",
           add: true,
-          options: positions,
+          options: poss,
           placeholder: "\u0627\u0644\u0645\u0633\u0645\u0649 \u0627\u0644\u0648\u0638\u064A\u0641\u064A",
           handleChange: function handleChange(e) {
             _handleChange(e);
@@ -3474,8 +3482,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flowbite__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! flowbite */ "./node_modules/flowbite/dist/flowbite.js");
 /* harmony import */ var flowbite__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(flowbite__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-var _window$document$getE;
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -3490,7 +3496,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
-var appName = ((_window$document$getE = window.document.getElementsByTagName("title")[0]) === null || _window$document$getE === void 0 ? void 0 : _window$document$getE.innerText) || "Laravel";
+var appName = "شركة العاصمة لشحن البضائع";
 (0,_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_2__.createInertiaApp)({
   title: function title(_title) {
     return "".concat(_title, " - ").concat(appName);

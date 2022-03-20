@@ -6,8 +6,7 @@ import { createInertiaApp } from "@inertiajs/inertia-react";
 import { InertiaProgress } from "@inertiajs/progress";
 import "flowbite";
 
-const appName =
-    window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
+const appName = "شركة العاصمة لشحن البضائع";
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,

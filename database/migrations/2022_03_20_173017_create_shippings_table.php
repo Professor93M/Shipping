@@ -26,8 +26,8 @@ class CreateShippingsTable extends Migration
             $table->string('shipname')->nullable();
             $table->string('shipdesc')->nullable();
             $table->string('weight')->nullable();
-            $table->bigInteger('users_id')->unsigned();
-            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->bigInteger('agents_id')->unsigned();
+            $table->foreign('agents_id')->references('id')->on('agents')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

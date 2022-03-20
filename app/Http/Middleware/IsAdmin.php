@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class IsAdmin
 {
@@ -19,6 +21,6 @@ class IsAdmin
         if (Auth::user() &&  Auth::user()->pos == 'مدير') {
             return $next($request);
         }
-        return redirect('/');
+        return Redirect::route('login');
     }
 }

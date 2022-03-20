@@ -6,5 +6,9 @@ use Illuminate\Http\Request;
 
 class AgentsController extends Controller
 {
-    //
+    protected $fillable = [
+        'name',
+        'color',
+        'status',
+    ];
 }

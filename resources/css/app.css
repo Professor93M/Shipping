@@ -1,3 +1,30 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+    @font-face {
+        font-family: "Tajawal-Bold";
+        src: url(/fonts/Tajawal-Bold.ttf);
+    }
+    @font-face {
+        font-family: "Tajawal-Black";
+        src: url(/fonts/Tajawal-Black.ttf);
+    }
+    @font-face {
+        font-family: "Tajawal-Regular";
+        src: url(/fonts/Tajawal-Regular.ttf);
+    }
+    @font-face {
+        font-family: "Tajawal-ExtraBold";
+        src: url(/fonts/Tajawal-ExtraBold.ttf);
+    }
+    @font-face {
+        font-family: "Tajawal-Light";
+        src: url(/fonts/Tajawal-Light.ttf);
+    }
+}
+
+.form {
+    background: url("/h.jpg") no-repeat cover cover;
+}

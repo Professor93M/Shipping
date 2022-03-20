@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
-export default function Label({ forInput, value, className, children }) {
+export default function Label({ value, className, children, forHtml }) {
     return (
-        <label htmlFor={forInput} className={`block font-medium text-sm text-gray-700 ` + className}>
+        <label htmlFor={forHtml} className={className}>
             {value ? value : children}
         </label>
     );

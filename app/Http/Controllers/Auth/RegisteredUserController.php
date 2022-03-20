@@ -34,6 +34,7 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'email' => 'required|email|unique:users',
             'password' => ['required', 'confirmed'],
@@ -50,7 +51,7 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'name' => $request->fname,
+            'name' => $request->name,
             'note' => $request->note,
             'phone' => $request->phone,
             'address' => $request->address,

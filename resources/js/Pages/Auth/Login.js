@@ -3,7 +3,7 @@ import Button from "@/Components/Button";
 import Guest from "@/Layouts/Guest";
 import Checkbox from "@/Components/Checkbox";
 import ValidationErrors from "@/Components/ValidationErrors";
-import { Head, useForm } from "@inertiajs/inertia-react";
+import { Head, useForm, Link } from "@inertiajs/inertia-react";
 import FormItem from "@/Components/FormItem";
 import { Inertia } from "@inertiajs/inertia";
 
@@ -80,10 +80,11 @@ export default function Login({ status }) {
                     </label>
                 </div>
 
-                <div className="flex items-center justify-end mt-4">
+                <div className="flex items-center justify-around mt-4">
                     <Button primary processing={processing}>
                         دخول
                     </Button>
+                    <Link href="/register" className="bg-gray-200 py-2 px-3 rounded-md">انشاء حساب</Link>
                 </div>
             </form>
         </Guest>

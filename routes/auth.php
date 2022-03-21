@@ -3,6 +3,7 @@
 use App\Http\Controllers\AgentsController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\InoviceController;
 use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\StatusController;
@@ -20,6 +21,9 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
+
+    Route::get('/users', [Controller::class, 'index'])
+                ->name('users.index');
 
     // InvoiceController +++++++++++++++++++++++++++++++++++++++++++
     Route::get('invoice', [InoviceController::class, 'index'])

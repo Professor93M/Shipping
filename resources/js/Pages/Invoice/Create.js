@@ -40,8 +40,8 @@ const Create = (props) => {
     const submit = (e) => {
         e.preventDefault();
 
-        // console.log(data);
-        post("/invoice/store");
+        console.log(data);
+        // post("/invoice/store");
     };
     const handleClick = () => {
         Inertia.get("/");

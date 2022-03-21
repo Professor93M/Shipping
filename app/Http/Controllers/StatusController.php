@@ -9,6 +9,9 @@ use Inertia\Inertia;
 
 class StatusController extends Controller
 {
+    public function status(){
+        return Inertia::render('Status/Status');
+    }
     public function index()
     {
         $statuses = Status::all();

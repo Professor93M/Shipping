@@ -55,7 +55,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('shipping/destroy/{id}', [ShippingController::class, 'destroy']);
 
     // StatusController +++++++++++++++++++++++++++++++++++++++++++
-    Route::get('status');
+    Route::get('status', [StatusController::class, 'status'])
+                ->name('statuses.status');
     Route::get('status/create', [StatusController::class, 'create']);
     Route::post('status/store', [StatusController::class, 'store']);
     Route::get('status/edit/{id}', [StatusController::class, 'edit']);

@@ -7,6 +7,7 @@ export default function Input({
     placeholder,
     id,
     max,
+    color,
     min,
     required,
     isFocused,
@@ -31,7 +32,7 @@ export default function Input({
             min={min}
             name={name}
             value={value}
-            className={className}
+            className={color ? null : className}
             ref={input}
             placeholder={placeholder}
             required={required}

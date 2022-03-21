@@ -141,7 +141,7 @@ const ReactTable = ({ data, user, cols, arabicCols, show, paginate }) => {
                                     return (
                                         <td
                                             {...cell.getCellProps()}
-                                            className="p-3  text-center"
+                                            className={`p-3 text-center`}
                                             key={index}
                                         >
                                             {cell.render("Cell")}

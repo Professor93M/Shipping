@@ -12,11 +12,16 @@ const formItem = ({
     value,
     required,
     handleChange,
+    color,
     disabled,
     children,
 }) => {
     return (
-        <div className="relative z-0 mb-6 w-full group">
+        <div
+            className={` ${
+                color ? "flex w-full" : "relative z-0 mb-6 w-full group"
+            } `}
+        >
             {children ? (
                 children
             ) : (
@@ -24,6 +29,7 @@ const formItem = ({
                     {" "}
                     <Input
                         type={type}
+                        color={color}
                         name={name}
                         id={name}
                         value={value}

@@ -5,24 +5,33 @@ import { Link } from "@inertiajs/inertia-react";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import moment from "moment";
 
-const Index = ({ auth, errors, shippings, columns }) => {
+const Index = ({ auth, errors, statuses, columns }) => {
     const cols = Object.keys(columns);
-    const data = shippings.map((item) => {
+    const data = statuses.map((item) => {
         return {
             ...item,
+            // color: <p className={`bg-[${item.color}] w-4 h-4`}></p>,
+            color: (
+                <input
+                    type="color"
+                    value={item.color}
+                    disabled
+                    // className={`bg-[${item.color}] w-4 h-4`}
+                />
+            ),
             created_at: moment(item.created_at).format("YYYY-MM-DD"),
-            status: item.status === null ? "غير مدفوعة" : "مدفوعة",
         };
     });
 
+    console.log(data);
     return (
-        <Layout auth={auth} errors={errors} heading="الفواتير">
+        <Layout auth={auth} errors={errors} heading="الحالات">
             <div className=" px-2">
                 <Link
-                    href="/shipping/create"
+                    href="/status/create"
                     className="w-fit flex items-center gap-x-4 px-4 py-2 rounded-md bg-primary-default hover:bg-primary-dark text-muted"
                 >
-                    <span>إضافة امر شغل</span>
+                    <span>إضافة حالة جديدة</span>
                     <AiOutlineUserAdd className="bg-inherit" />
                 </Link>
             </div>

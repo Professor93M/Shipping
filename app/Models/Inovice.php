@@ -16,6 +16,6 @@ class Inovice extends Model
         'qty',
         'discount',
         'status',
-        'users_id',
+        'agents_id',
     ];
 }

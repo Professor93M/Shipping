@@ -51,7 +51,7 @@ export default function Login({ status }) {
                 <FormItem
                     name="email"
                     type="email"
-                    label="الاسم"
+                    label="البريد الالكتروني"
                     placeholder=" "
                     required
                     handleChange={handleChange}

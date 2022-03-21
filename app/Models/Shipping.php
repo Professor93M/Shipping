@@ -21,6 +21,6 @@ class Shipping extends Model
         'shipname',
         'shipdesc',
         'weight',
-        'users_id',
+        'agents_id',
     ];
 }

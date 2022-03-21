@@ -1,7 +1,7 @@
 import React from "react";
 
 const Show = () => {
-    return <div>Show</div>;
+    return <div></div>;
 };
 
 export default Show;

@@ -3,7 +3,6 @@ import React, { useEffect, useRef } from "react";
 export default function Input({
     type = "text",
     name,
-    value,
     className,
     placeholder,
     id,
@@ -12,6 +11,8 @@ export default function Input({
     required,
     isFocused,
     handleChange,
+    disabled,
+    value,
 }) {
     const input = useRef();
 
@@ -24,6 +25,7 @@ export default function Input({
     return (
         <input
             type={type}
+            disabled={disabled}
             id={id}
             max={max}
             min={min}

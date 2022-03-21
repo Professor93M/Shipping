@@ -6,17 +6,22 @@ import Button from "@/Components/Button";
 import { Inertia } from "@inertiajs/inertia";
 
 const Create = (props) => {
-    const { data, setData, post, processing, errors, reset } = useForm([
-        {
-            type: "",
-            desc: "",
-            price: "",
-            qty: "",
-            discount: "",
-            status: "",
-        },
-    ]);
+    const { data, setData, post, processing, errors, reset } = useForm({
+        items: [
+            {
+                type: "",
+                desc: "",
+                price: "",
+                qty: "",
+                discount: "",
+                status: "",
+            },
+        ],
+        total: 0,
+        agent_id: "",
+    });
 
+    console.log(data, "data");
     // const statuses = [
     //     {
     //         name: "مدفوعة",
@@ -25,6 +30,21 @@ const Create = (props) => {
     //         name: "غير مدفوعة",
     //     },
     // ];
+
+    useEffect(() => {
+        if (data.items) {
+            let total = 0;
+            data.items.forEach((item) => {
+                total += item.price * item.qty - item.discount;
+            });
+
+            if (total > 0) {
+                setData({ ...data, total });
+            } else {
+                setData({ ...data, total: 0 });
+            }
+        }
+    }, [data.items]);
 
     const submit = (e) => {
         e.preventDefault();
@@ -36,36 +56,36 @@ const Create = (props) => {
         Inertia.get("/");
     };
     const handleChange = (event, index) => {
-        const inputs = [...data];
+        const inputs = [...data.items];
         inputs[index][event.target.name] = event.target.value;
-        setData(inputs);
+        setData({ items: inputs, total: data.total });
     };
 
     const addInputs = () => {
-        setData([
-            ...data,
-            {
-                type: "",
-                desc: "",
-                price: "",
-                qty: "",
-                discount: "",
-                status: "",
-            },
-        ]);
+        const newInputs = [...data.items];
+        newInputs.push({
+            type: "",
+            desc: "",
+            price: "",
+
+            qty: "",
+            discount: "",
+            status: "",
+        });
+        setData({ ...data, items: newInputs });
     };
 
     const removeInputs = (index) => {
-        const newData = [...data];
+        const newData = [...data.items];
         newData.splice(index, 1);
-        setData(newData);
+        setData({ ...data, items: newData });
     };
 
     return (
         <Layout auth={props.auth} errors={props.errors} heading="إضافة فاتورة">
             <form onSubmit={submit} className="mt-12">
                 <div className="grid grid-cols-4 items-center justify-around gap-x-4 ">
-                    {data.map((item, index) => (
+                    {data.items.map((item, index) => (
                         <div
                             key={index}
                             className="col-span-4 flex items-center gap-4"
@@ -146,6 +166,30 @@ const Create = (props) => {
                             </Button>
                         </div>
                     ))}
+                    <div className="col-span-2 mt-12">
+                        <FormItem
+                            name="total"
+                            type="text"
+                            label="المجموع"
+                            forInput="total"
+                            min="0"
+                            disabled
+                            value={data.total}
+                            placeholder=" "
+                            handleChange={(e) => handleChange(e, index)}
+                        />
+                        <FormItem
+                            name="agent_id"
+                            type="text"
+                            label="العميل"
+                            forInput="agent_id"
+                            min="0"
+                            disabled
+                            value={data.agent_id}
+                            placeholder=" "
+                            handleChange={(e) => handleChange(e, index)}
+                        />
+                    </div>
                 </div>
                 <div className="flex items-center justify-center gap-x-8 mt-4">
                     <Button primary processing={processing}>

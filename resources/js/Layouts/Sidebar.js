@@ -7,15 +7,16 @@ import {
 import { FiUsers } from "react-icons/fi";
 import { RiUser2Line } from "react-icons/ri";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { Link } from "@inertiajs/inertia-react";
 
 const Sidebar = ({ auth }) => {
     return (
         <aside className="w-64" aria-label="Sidebar">
-            <div className="overflow-y-auto py-4 px-3 min-h-screen bg-white rounded dark:bg-gray-800">
+            <div className="overflow-y-auto py-4 pt-12 px-3 min-h-screen bg-white rounded dark:bg-gray-800">
                 <ul className="space-y-2">
                     <li>
-                        <button
-                            type="button"
+                        <Link
+                            href="/"
                             className="flex items-center p-2 w-full gap-x-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                         >
                             <AiOutlineDashboard className="h-6 w-6 " />
@@ -25,7 +26,7 @@ const Sidebar = ({ auth }) => {
                             >
                                 لوحة التحكم
                             </span>
-                        </button>
+                        </Link>
                     </li>
                     {auth.user.pos === "مدير" ? (
                         <li>
@@ -48,7 +49,7 @@ const Sidebar = ({ auth }) => {
                             <ul id="a" className="hidden py-2 space-y-2">
                                 <li>
                                     <a
-                                        href="#"
+                                        href="/users"
                                         className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                                     >
                                         إدارة الموظفين
@@ -56,7 +57,7 @@ const Sidebar = ({ auth }) => {
                                 </li>
                                 <li>
                                     <a
-                                        href="#"
+                                        href="/users/create"
                                         className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                                     >
                                         إضافة موظف
@@ -84,7 +85,7 @@ const Sidebar = ({ auth }) => {
                         <ul id="agents" className="hidden py-2 space-y-2">
                             <li>
                                 <a
-                                    href="#"
+                                    href="/agents"
                                     className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                                 >
                                     إدارة العملاء
@@ -93,7 +94,7 @@ const Sidebar = ({ auth }) => {
                             {auth.user.pos !== "مدير" ? (
                                 <li>
                                     <a
-                                        href="#"
+                                        href="/agents/create"
                                         className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                                     >
                                         إضافة عميل
@@ -121,7 +122,7 @@ const Sidebar = ({ auth }) => {
                         <ul id="invoices" className="hidden py-2 space-y-2">
                             <li>
                                 <a
-                                    href="#"
+                                    href="/invoices"
                                     className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                                 >
                                     إدارة الفواتير
@@ -130,7 +131,7 @@ const Sidebar = ({ auth }) => {
                             {auth.user.pos !== "مدير" ? (
                                 <li>
                                     <a
-                                        href="#"
+                                        href="/invoices/create"
                                         className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                                     >
                                         إضافة فاتورة
@@ -139,7 +140,7 @@ const Sidebar = ({ auth }) => {
                             ) : null}
                             <li>
                                 <a
-                                    href="#"
+                                    href="/invoices/return"
                                     className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                                 >
                                     الفواتير المرتجعة
@@ -166,7 +167,7 @@ const Sidebar = ({ auth }) => {
                         <ul id="shippings" className="hidden py-2 space-y-2">
                             <li>
                                 <a
-                                    href="#"
+                                    href="/shippings"
                                     className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                                 >
                                     اوامر الشحن
@@ -175,7 +176,7 @@ const Sidebar = ({ auth }) => {
                             {auth.user.pos !== "مدير" ? (
                                 <li>
                                     <a
-                                        href="#"
+                                        href="/shippings/create"
                                         className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                                     >
                                         اضف امر شغل
@@ -184,7 +185,7 @@ const Sidebar = ({ auth }) => {
                             ) : null}
                             <li>
                                 <a
-                                    href="#"
+                                    href="/shippings/settings"
                                     className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                                 >
                                     اعدادات اوامر الشحن

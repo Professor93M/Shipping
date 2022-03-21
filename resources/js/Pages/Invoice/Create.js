@@ -57,7 +57,8 @@ const Create = (props) => {
                 return agent.id;
             }
         });
-        setData({ ...data, agent_id: agentId });
+
+        setData({ ...data, agent_id: agentId[0].id });
     };
 
     const addInputs = () => {

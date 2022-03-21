@@ -7,6 +7,8 @@ export default function Input({
     className,
     placeholder,
     id,
+    max,
+    min,
     required,
     isFocused,
     handleChange,
@@ -23,6 +25,8 @@ export default function Input({
         <input
             type={type}
             id={id}
+            max={max}
+            min={min}
             name={name}
             value={value}
             className={className}

@@ -4,6 +4,7 @@ import FormItem from "@/Components/FormItem";
 import { Link, useForm } from "@inertiajs/inertia-react";
 import Button from "@/Components/Button";
 import { Inertia } from "@inertiajs/inertia";
+import Combo from "@/Components/Combo";
 
 const Create = (props) => {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -20,16 +21,6 @@ const Create = (props) => {
         total: 0,
         agent_id: "",
     });
-
-    console.log(data, "data");
-    // const statuses = [
-    //     {
-    //         name: "مدفوعة",
-    //     },
-    //     {
-    //         name: "غير مدفوعة",
-    //     },
-    // ];
 
     useEffect(() => {
         if (data.items) {
@@ -59,6 +50,14 @@ const Create = (props) => {
         const inputs = [...data.items];
         inputs[index][event.target.name] = event.target.value;
         setData({ items: inputs, total: data.total });
+    };
+    const handleAgent = (event) => {
+        const agentId = props.agents.filter((agent) => {
+            if (agent.name === event.target.value) {
+                return agent.id;
+            }
+        });
+        setData({ ...data, agent_id: agentId });
     };
 
     const addInputs = () => {
@@ -139,18 +138,7 @@ const Create = (props) => {
                                 placeholder=" "
                                 handleChange={(e) => handleChange(e, index)}
                             />
-                            {/* <FormItem>
-                                <Combo
-                                    className={
-                                        "block w-full text-sm  text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-default focus:outline-none focus:ring-0 font-semibold focus:border-dark peer"
-                                    }
-                                    name="status"
-                                    add
-                                    options={statuses}
-                                    placeholder="الحالة"
-                                    handleChange={(e) => handleChange(e, index)}
-                                />
-                            </FormItem> */}
+
                             <Button
                                 primary
                                 type="button"
@@ -178,17 +166,19 @@ const Create = (props) => {
                             placeholder=" "
                             handleChange={(e) => handleChange(e, index)}
                         />
-                        <FormItem
-                            name="agent_id"
-                            type="text"
-                            label="العميل"
-                            forInput="agent_id"
-                            min="0"
-                            disabled
-                            value={data.agent_id}
-                            placeholder=" "
-                            handleChange={(e) => handleChange(e, index)}
-                        />
+                        <FormItem>
+                            <Combo
+                                className={
+                                    "block w-full text-sm  text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-default focus:outline-none focus:ring-0 font-semibold focus:border-dark peer"
+                                }
+                                name="agent_id"
+                                add
+                                options={props.agents}
+                                value={data.agent_id}
+                                placeholder="العميل"
+                                handleChange={(e) => handleAgent(e)}
+                            />
+                        </FormItem>
                     </div>
                 </div>
                 <div className="flex items-center justify-center gap-x-8 mt-4">

@@ -10,34 +10,24 @@ import { Inertia } from "@inertiajs/inertia";
 const Create = (props) => {
     const { data, setData, post, processing, errors, reset } = useForm({
         type: "",
-        desc: "",
-        price: "",
-        qty: "",
-        discount: "",
-        status: "",
+        name: "",
+        phone: "",
+        address: "",
+        country: "",
     });
+
     const types = [
         {
-            name: "نقل شحنة",
+            name: "شركة",
         },
         {
-            name: "توصيل شهري",
+            name: "شخص",
         },
     ];
-
-    const statuses = [
-        {
-            name: "مدفوعة",
-        },
-        {
-            name: "غير مدفوعة",
-        },
-    ];
-
     const submit = (e) => {
         e.preventDefault();
 
-        post("/invoice/store");
+        post("/agents/store");
     };
     const handleClick = () => {
         Inertia.get("/");
@@ -53,8 +43,8 @@ const Create = (props) => {
     return (
         <Layout auth={props.auth} errors={props.errors} heading="إضافة عميل">
             <form onSubmit={submit} className="mt-12">
-                <div className="grid grid-cols-3 items-center justify-around gap-x-4 ">
-                    <div className="col-span-1">
+                <div className="grid grid-cols-4 items-center justify-around gap-x-4 ">
+                    <div className="col-span-4 w-1/4">
                         <FormItem>
                             <Combo
                                 className={
@@ -72,10 +62,22 @@ const Create = (props) => {
                     </div>
                     <div className="col-span-1">
                         <FormItem
-                            name="desc"
+                            name="name"
                             type="text"
-                            label="الوصف"
-                            forInput="desc"
+                            label="الاسم"
+                            forInput="name"
+                            required
+                            placeholder=" "
+                            handleChange={handleChange}
+                        />
+                    </div>
+
+                    <div className="col-span-1">
+                        <FormItem
+                            name="phone"
+                            type="tel"
+                            label="الهاتف"
+                            forInput="phone"
                             required
                             placeholder=" "
                             handleChange={handleChange}
@@ -83,10 +85,10 @@ const Create = (props) => {
                     </div>
                     <div className="col-span-1">
                         <FormItem
-                            name="price"
+                            name="address"
                             type="text"
-                            label="السعر"
-                            forInput="price"
+                            label="العنوان"
+                            forInput="address"
                             required
                             placeholder=" "
                             handleChange={handleChange}
@@ -94,41 +96,14 @@ const Create = (props) => {
                     </div>
                     <div className="col-span-1">
                         <FormItem
-                            name="qty"
+                            name="country"
                             type="text"
-                            label="الكمية"
-                            forInput="qty"
+                            label="الدولة"
+                            forInput="country"
                             required
                             placeholder=" "
                             handleChange={handleChange}
                         />
-                    </div>
-                    <div className="col-span-1">
-                        <FormItem
-                            name="discount"
-                            type="text"
-                            label="الخصم"
-                            forInput="discount"
-                            required
-                            placeholder=" "
-                            handleChange={handleChange}
-                        />
-                    </div>
-                    <div className="col-span-1">
-                        <FormItem>
-                            <Combo
-                                className={
-                                    "block w-full text-sm  text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-default focus:outline-none focus:ring-0 font-semibold focus:border-dark peer"
-                                }
-                                name="status"
-                                add
-                                options={statuses}
-                                placeholder="الحالة"
-                                handleChange={(e) => {
-                                    handleChange(e);
-                                }}
-                            />
-                        </FormItem>
                     </div>
                 </div>
                 <div className="flex items-center justify-center gap-x-8 mt-4">

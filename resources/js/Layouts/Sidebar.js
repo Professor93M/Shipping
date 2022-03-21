@@ -131,7 +131,7 @@ const Sidebar = ({ auth }) => {
                             {auth.user.pos !== "مدير" ? (
                                 <li>
                                     <a
-                                        href="/invoices/create"
+                                        href="/invoice/create"
                                         className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                                     >
                                         إضافة فاتورة

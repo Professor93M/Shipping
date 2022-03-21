@@ -16,6 +16,16 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
+
+    Route::get('invoice/index', [RegisteredUserController::class, 'index'])
+                ->name('invoice.index');
+    Route::get('invoice/create', [RegisteredUserController::class, 'create'])
+                ->name('invoice.create');
+    Route::post('invoice/store', [RegisteredUserController::class, 'store']);
+    Route::get('invoice/edit/{id}', [RegisteredUserController::class, 'edit'])
+                ->name('invoice.edit');
+    Route::put('invoice/update/{id}', [RegisteredUserController::class, 'update']);
+    Route::delete('invoice/destroy/{id}', [RegisteredUserController::class, 'destroy']);
 });
 
 Route::get('register', [RegisteredUserController::class, 'create'])

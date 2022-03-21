@@ -16,17 +16,16 @@ class Inovice extends Model
         'qty',
         'discount',
         'status',
-        'agents_id',
         'users_id',
     ];
-
-    public function agents()
-    {
-        return $this->belongsTo(Agents::class);
-    }
-
+    
     public function users()
     {
         return $this->belongsTo(Users::class);
+    }
+
+    public function orders()
+    {
+        return $this->belongsTo(Orders::class);
     }
 }

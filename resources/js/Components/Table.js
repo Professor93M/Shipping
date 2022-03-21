@@ -4,7 +4,7 @@ import { BiEdit, BiTrash } from "react-icons/bi";
 import { useGlobalFilter } from "react-table/dist/react-table.development";
 // import GlobalFilter from "./GlobalFilter";
 
-const ReactTable = ({ data, cols, arabicCols, paginate }) => {
+const ReactTable = ({ data, cols, arabicCols, show, paginate }) => {
     const columns = useMemo(
         () =>
             data[0]
@@ -27,13 +27,16 @@ const ReactTable = ({ data, cols, arabicCols, paginate }) => {
             ...columns,
             {
                 id: "edit",
-                Header: "تعديل",
-                Cell: ({ row }) => (
-                    <BiEdit
-                        className="bg-green-400  mx-auto hover:bg-green-500 text-slate-200 w-8 h-8 p-1 rounded-md cursor-pointer "
-                        onClick={() => alert(row.values.id)}
-                    />
-                ),
+                Header: show ? "عرض" : "تعديل",
+                Cell: ({ row }) =>
+                    show ? (
+                        show
+                    ) : (
+                        <BiEdit
+                            className="bg-green-400  mx-auto hover:bg-green-500 text-slate-200 w-8 h-8 p-1 rounded-md cursor-pointer "
+                            onClick={() => alert(row.values.id)}
+                        />
+                    ),
             },
             {
                 id: "delete",

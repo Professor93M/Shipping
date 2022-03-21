@@ -63,7 +63,7 @@ Route::middleware('auth')->group(function () {
     Route::put('status/update/{id}', [StatusController::class, 'update']);
     Route::delete('status/destroy/{id}', [StatusController::class, 'destroy']); 
     Route::get('status/settings', [StatusController::class, 'index'])
-                ->name('status.index');
+                ->name('statuses.index');
 });
 
 Route::get('register', [RegisteredUserController::class, 'create'])

@@ -34,25 +34,19 @@ class StatusController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'type' => 'required',
             'name' => 'required',
-            'phone' => 'required',
-            'address' => 'required',
-            'country' => 'required',
+            'status' => 'required',
+            'color' => 'required',
         ],[
-            'type.required' => 'يجب ادخال نوع الحالة',
-            'name.required' => 'يجب ادخال اسم الحالة',
-            'phone.required' => 'يجب ادخال رقم الهاتف',
-            'address.required' => 'يجب ادخال العنوان',
-            'country.required' => 'يجب ادخال الدولة',
+            'name.required' => 'يجب ادخال الاسم',
+            'status.required' => 'يجب ادخال الحالة',
+            'color.required' => 'يجب ادخال اللون',
         ]);
 
         $status = new Status();
-        $status->type = $request->type;
         $status->name = $request->name;
-        $status->phone = $request->phone;
-        $status->address = $request->address;
-        $status->country = $request->country;
+        $status->status = $request->status;
+        $status->color = $request->color;
         $status->users_id = Auth::user()->id;
         $status->save();
 
@@ -68,25 +62,19 @@ class StatusController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'type' => 'required',
             'name' => 'required',
-            'phone' => 'required',
-            'address' => 'required',
-            'country' => 'required',
+            'status' => 'required',
+            'color' => 'required',
         ],[
-            'type.required' => 'يجب ادخال نوع الحالة',
-            'name.required' => 'يجب ادخال اسم الحالة',
-            'phone.required' => 'يجب ادخال رقم الهاتف',
-            'address.required' => 'يجب ادخال العنوان',
-            'country.required' => 'يجب ادخال الدولة',
+            'name.required' => 'يجب ادخال الاسم',
+            'status.required' => 'يجب ادخال الحالة',
+            'color.required' => 'يجب ادخال اللون',
         ]);
 
         $status = Status::find($id);
-        $status->type = $request->type;
         $status->name = $request->name;
-        $status->phone = $request->phone;
-        $status->address = $request->address;
-        $status->country = $request->country;
+        $status->status = $request->status;
+        $status->color = $request->color;
         $status->users_id = Auth::user()->id;
         $status->save();
 

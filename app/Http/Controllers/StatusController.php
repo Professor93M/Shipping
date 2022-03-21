@@ -15,7 +15,7 @@ class StatusController extends Controller
     public function index()
     {
         $statuses = Status::all();
-        return Inertia::render('Statuses/Index', [
+        return Inertia::render('Status/Index', [
             'statuses' => $statuses,
             'columns' => [
                 'name' => 'الاسم',
@@ -28,7 +28,7 @@ class StatusController extends Controller
 
     public function create()
     {
-        return Inertia::render('Statuses/Create');
+        return Inertia::render('Status/Create');
     }
 
     public function store(Request $request)
@@ -62,7 +62,7 @@ class StatusController extends Controller
     public function edit($id)
     {
         $status = Status::find($id);
-        return Inertia::render('Statuses/Edit', ['status' => $status]);
+        return Inertia::render('Status/Edit', ['status' => $status]);
     }
 
     public function update(Request $request, $id)

@@ -51,13 +51,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('shipping/destroy/{id}', [ShippingController::class, 'destroy']);
 
     // StatusController +++++++++++++++++++++++++++++++++++++++++++
-    Route::get('status', [StatusController::class, 'index'])
-                ->name('status.index');
+    Route::get('status');
     Route::get('status/create', [StatusController::class, 'create']);
     Route::post('status/store', [StatusController::class, 'store']);
     Route::get('status/edit/{id}', [StatusController::class, 'edit']);
     Route::put('status/update/{id}', [StatusController::class, 'update']);
     Route::delete('status/destroy/{id}', [StatusController::class, 'destroy']); 
+    Route::get('status/settings', [StatusController::class, 'index'])
+                ->name('status.index');
 });
 
 Route::get('register', [RegisteredUserController::class, 'create'])

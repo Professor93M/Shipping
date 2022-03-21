@@ -12,7 +12,15 @@ class StatusController extends Controller
     public function index()
     {
         $statuses = Status::all();
-        return Inertia::render('Statuses/Index', ['statuses' => $statuses]);
+        return Inertia::render('Statuses/Index', [
+            'statuses' => $statuses,
+            'columns' => [
+                'name' => 'الاسم',
+                'color' => 'اللون',
+                'status' => 'الحالة',
+                'created_at' => 'تاريخ الاضافة',
+            ],
+        ]);
     }
 
     public function create()

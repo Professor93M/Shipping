@@ -12,7 +12,16 @@ class AgentsController extends Controller
     public function index()
     {
         $agents = Agents::all();
-        return Inertia::render('Agents/Index', ['agents' => $agents]);
+        return Inertia::render('Agents/Index', [
+            'agents' => $agents,
+            'columns' => [
+                'name' => 'الاسم',
+                'phone' => 'رقم الهاتف',
+                'address' => 'العنوان',
+                'country' => 'الدولة',
+                'created_at' => 'تاريخ الاضافة',
+            ],
+        ]);
     }
 
     public function create()

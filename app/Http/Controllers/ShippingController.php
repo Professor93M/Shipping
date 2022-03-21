@@ -12,7 +12,15 @@ class ShippingController extends Controller
     public function index()
     {
         $shippings = Shipping::all();
-        return Inertia::render('Shippings/Index', ['shippings' => $shippings]);
+        return Inertia::render('Shippings/Index', [
+            'shippings' => $shippings,
+            'columns' => [
+                'name' => 'الاسم',
+                'num' => 'رقم الامر',
+                'shipdate' => 'تاريخ الشحن',
+                'created_at' => 'تاريخ الاضافة',
+            ],
+        ]);
     }
 
     public function create()

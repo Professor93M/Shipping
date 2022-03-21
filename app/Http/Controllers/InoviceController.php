@@ -12,6 +12,15 @@ class InoviceController extends Controller
     public function index(){
         return Inertia::render('Invoice/Index',[
             'invoice' => Inovice::all(),
+            'columns' => [
+                'type' => 'البند',
+                'desc' => 'الوصف',
+                'price' => 'السعر',
+                'qty' => 'الكمية',
+                'discount' => 'الخصم',
+                'status' => 'حالة الفاتورة',
+                'created_at' => 'تاريخ الاضافة',
+            ],
         ]);
     }
 

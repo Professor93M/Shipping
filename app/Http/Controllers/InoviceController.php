@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agents;
 use App\Models\Inovice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -25,7 +26,7 @@ class InoviceController extends Controller
     }
 
     public function create(){
-        return Inertia::render('Invoice/Create');
+        return Inertia::render('Invoice/Create',['agents' => Agents::all()]);
     }
 
     public function store(Request $request){
@@ -42,6 +43,7 @@ class InoviceController extends Controller
     public function edit($id){
         return Inertia::render('Invoice/Edit',[
             'invoice' => Inovice::findOrFail($id),
+            'agents' => Agents::all()
         ]);
     }
 

@@ -25,7 +25,7 @@ class ShippingController extends Controller
 
     public function create()
     {
-        return Inertia::render('Shippings/Create');
+        return Inertia::render('Shippings/Create', ['agents' => Agents::all()]);
     }
 
     public function store(Request $request)
@@ -63,7 +63,7 @@ class ShippingController extends Controller
     public function edit($id)
     {
         $shipping = Shipping::find($id);
-        return Inertia::render('Shippings/Edit', ['shipping' => $shipping]);
+        return Inertia::render('Shippings/Edit', ['shipping' => $shipping,'agents' => Agents::all()]);
     }
 
     public function update(Request $request, $id)

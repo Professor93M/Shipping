@@ -27,9 +27,9 @@ Route::middleware('auth')->group(function () {
     Route::get('invoice/create', [InoviceController::class, 'create'])
                 ->name('invoice.create');
     Route::post('invoice/store', [InoviceController::class, 'store']);
-    Route::get('invoice/edit/{id}', [InoviceController::class, 'edit'])
-                ->name('invoice.edit');
-    Route::put('invoice/update/{id}', [InoviceController::class, 'update']);
+    Route::get('invoice/show/{id}', [InoviceController::class, 'show'])
+                ->name('invoice.show');
+    // Route::put('invoice/update/{id}', [InoviceController::class, 'update']);
     Route::delete('invoice/destroy/{id}', [InoviceController::class, 'destroy']);
 
     // AgentsController +++++++++++++++++++++++++++++++++++++++++++

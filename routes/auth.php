@@ -47,7 +47,7 @@ Route::middleware('auth')->group(function () {
 
     // ShippingController +++++++++++++++++++++++++++++++++++++++++++
     Route::get('shipping', [ShippingController::class, 'index'])
-                ->name('shipping.index');
+                ->name('shippings.index');
     Route::get('shipping/create', [ShippingController::class, 'create']);
     Route::post('shipping/store', [ShippingController::class, 'store']);
     Route::get('shipping/edit/{id}', [ShippingController::class, 'edit']);

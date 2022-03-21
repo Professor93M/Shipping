@@ -30,33 +30,36 @@ class InoviceController extends Controller
     }
 
     public function store(Request $request){
-        $request->validate([
-            'type' => 'required',
-            'price' => 'required',
-            'agents_id' => 'required',
-        ]);
+        // for ($i = 0; $i < count($request->all()) ; $i++){
+        foreach($request->all() as $key => $req){
+            $req->validate([
+                'type' => 'required',
+                'price' => 'required',
+                'agents_id' => 'required',
+            ]);
+            Inovice::create($req->all());
+        }
 
-        Inovice::create($request->all());
         return Redirect::route('dashboard');
     }
 
     public function edit($id){
-        return Inertia::render('Invoice/Edit',[
+        return Inertia::render('Invoice/Show',[
             'invoice' => Inovice::findOrFail($id),
             'agents' => Agents::all()
         ]);
     }
 
-    public function update(Request $request, $id){
-        $request->validate([
-            'type' => 'required',
-            'price' => 'required',
-            'agents_id' => 'required',
-        ]);
+    // public function update(Request $request, $id){
+    //     $request->validate([
+    //         'type' => 'required',
+    //         'price' => 'required',
+    //         'agents_id' => 'required',
+    //     ]);
 
-        Inovice::findOrFail($id)->update($request->all());
-        return Redirect::route('dashboard');
-    }
+    //     Inovice::findOrFail($id)->update($request->all());
+    //     return Redirect::route('dashboard');
+    // }
 
     public function destroy($id){
         Inovice::findOrFail($id)->delete();

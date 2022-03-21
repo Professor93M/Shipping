@@ -10,6 +10,7 @@ export default function Button({
     value,
     disabled,
     placeholder,
+    required,
     add,
 }) {
     return (
@@ -18,6 +19,7 @@ export default function Button({
                 disabled={disabled}
                 className={className}
                 name={name}
+                required={required}
                 onChange={handleChange}
                 defaultValue={placeholder}
             >

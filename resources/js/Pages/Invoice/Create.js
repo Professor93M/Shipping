@@ -174,6 +174,7 @@ const Create = (props) => {
                                 }
                                 name="agent_id"
                                 add
+                                required
                                 options={props.agents}
                                 value={data.agent_id}
                                 placeholder="العميل"

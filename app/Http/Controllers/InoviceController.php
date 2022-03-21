@@ -29,13 +29,10 @@ class InoviceController extends Controller
     }
 
     public function store(Request $request){
+        dd($request->all());
         $order = Orders::latest()->first('id');
         // for ($i = 0; $i < count($request->all()) ; $i++){
-        foreach($request->all() as $key => $req){
-            $req->validate([
-                'type' => 'required',
-                'price' => 'required',
-            ]);
+        foreach($request->items as $key => $req){
             Inovice::create([
                 'type' => $req['type'],
                 'desc' => $req['desc'],
@@ -43,13 +40,13 @@ class InoviceController extends Controller
                 'qty' => $req['qty'],
                 'discount' => $req['discount'],
                 'status' => $req['status'],
-                'orders_id' => $order->id,
                 'orders_id' => $order->id+1,
             ]);
         }
+        
         Orders::create([
-            'totalprice' => $request->totalprice,
-            'agents_id' => $request->agents_id,
+            'totalprice' => $request->total,
+            'agents_id' => $request->agents_id->id,
         ]);
 
         return Redirect::route('invoice.index');

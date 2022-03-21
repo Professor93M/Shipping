@@ -28,4 +28,5 @@ class Inovice extends Model
     {
         return $this->belongsTo(Orders::class);
     }
+    protected $dateFormat = 'U';
 }

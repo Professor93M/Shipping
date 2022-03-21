@@ -18,6 +18,7 @@ class StatusController extends Controller
         return Inertia::render('Status/Index', [
             'statuses' => $statuses,
             'columns' => [
+                'id' => '#',
                 'name' => 'الاسم',
                 'color' => 'اللون',
                 'status' => 'الحالة',

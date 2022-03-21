@@ -15,6 +15,7 @@ class AgentsController extends Controller
         return Inertia::render('Agents/Index', [
             'agents' => $agents,
             'columns' => [
+                'id' => '#',
                 'name' => 'الاسم',
                 'phone' => 'رقم الهاتف',
                 'address' => 'العنوان',

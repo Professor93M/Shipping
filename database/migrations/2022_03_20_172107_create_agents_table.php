@@ -20,7 +20,8 @@ class CreateAgentsTable extends Migration
             $table->string('phone');
             $table->string('address');
             $table->string('country');
-            $table->string('zip');
+            $table->bigInteger('users_id')->unsigned();
+            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

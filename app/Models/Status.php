@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Status extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'color',
+        'status',
+        'users_id',
+    ];
+
+    public function users()
+    {
+        return $this->belongsTo(Users::class);
+    }
 }

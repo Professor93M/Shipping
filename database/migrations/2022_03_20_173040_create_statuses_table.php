@@ -18,6 +18,8 @@ class CreateStatusesTable extends Migration
             $table->string('name');
             $table->string('color');
             $table->string('status');
+            $table->bigInteger('users_id')->unsigned();
+            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

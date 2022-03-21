@@ -22,5 +22,16 @@ class Shipping extends Model
         'shipdesc',
         'weight',
         'agents_id',
+        'users_id',
     ];
+
+    public function agents()
+    {
+        return $this->belongsTo(Agents::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsTo(Users::class);
+    }
 }

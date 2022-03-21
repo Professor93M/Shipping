@@ -30,9 +30,7 @@ const Index = ({ auth, errors, users, columns }) => {
             <div className=" mt-10">
                 <Table
                     data={data}
-                    show={
-                        <FiSearch className="bg-green-400  mx-auto hover:bg-green-500 text-slate-200 w-8 h-8 p-1 rounded-md cursor-pointer " />
-                    }
+                    user
                     cols={cols}
                     arabicCols={columns}
                     paginate

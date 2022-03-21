@@ -11,7 +11,8 @@ class Orders extends Model
 
     protected $fillable = [
         'totalprice',
-        'status'
+        'status',
+        'agents_id',
     ];
     
     public function invoice()

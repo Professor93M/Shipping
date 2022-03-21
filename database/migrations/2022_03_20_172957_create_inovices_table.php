@@ -17,12 +17,12 @@ class CreateInovicesTable extends Migration
             $table->bigIncrements('id');
             $table->string('type');
             $table->string('desc')->nullable();
-            $table->date('price');
-            $table->date('qty')->nullable();
+            $table->string('price');
+            $table->string('qty')->nullable();
             $table->string('discount')->nullable();
             $table->string('status')->nullable();
             $table->bigInteger('orders_id')->unsigned();
-            $table->foreign('orders_id')->references('id')->on('orders')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('orders_id')->references('id')->on('orders');
             $table->bigInteger('users_id')->unsigned();
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

@@ -29,7 +29,6 @@ class InoviceController extends Controller
     }
 
     public function store(Request $request){
-        dd($request->all());
         $order = Orders::latest()->first('id');
         // for ($i = 0; $i < count($request->all()) ; $i++){
         foreach($request->items as $key => $req){
@@ -40,13 +39,14 @@ class InoviceController extends Controller
                 'qty' => $req['qty'],
                 'discount' => $req['discount'],
                 'status' => $req['status'],
-                'orders_id' => $order->id+1,
+                'users_id' => auth()->user()->id,
+                'orders_id' => $order ? $order->id+1 : 1,
             ]);
         }
-        
+    
         Orders::create([
             'totalprice' => $request->total,
-            'agents_id' => $request->agents_id->id,
+            'agents_id' => $request->agent_id,
         ]);
 
         return Redirect::route('invoice.index');

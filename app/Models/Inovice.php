@@ -17,6 +17,7 @@ class Inovice extends Model
         'discount',
         'status',
         'users_id',
+        'orders_id',
     ];
     
     public function users()
@@ -28,5 +29,4 @@ class Inovice extends Model
     {
         return $this->belongsTo(Orders::class);
     }
-    protected $dateFormat = 'U';
 }

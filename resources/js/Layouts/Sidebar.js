@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
     AiOutlineDashboard,
     AiOutlineFileText,
@@ -10,12 +10,23 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { Link } from "@inertiajs/inertia-react";
 
 const Sidebar = ({ auth }) => {
+    const [isOpenAgents, setIsOpenAgents] = React.useState(false);
+    const [isOpenUsers, setIsOpenUsers] = React.useState(false);
+    const [isOpenInvoice, setIsOpenInvoice] = React.useState(false);
+    const [isOpenShipping, setIsOpenShipping] = React.useState(false);
+    // useEffect(() => {}, []);
+
+    const toggleUsers = () => setIsOpenUsers(!isOpenUsers);
+    const toggleAgents = () => setIsOpenAgents(!isOpenAgents);
+    const toggleInvoice = () => setIsOpenInvoice(!isOpenInvoice);
+    const toggleShipping = () => setIsOpenShipping(!isOpenShipping);
+
     return (
         <aside className="w-64" aria-label="Sidebar">
             <div className="overflow-y-auto py-4 pt-12 px-3 min-h-screen bg-white rounded dark:bg-gray-800">
                 <ul className="space-y-2">
                     <li>
-                        <Link
+                        <a
                             href="/"
                             className="flex items-center p-2 w-full gap-x-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                         >
@@ -26,15 +37,14 @@ const Sidebar = ({ auth }) => {
                             >
                                 لوحة التحكم
                             </span>
-                        </Link>
+                        </a>
                     </li>
                     {auth.user.pos === "مدير" ? (
                         <li>
                             <button
                                 type="button"
                                 className="flex items-center p-2 w-full gap-x-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                                aria-controls="a"
-                                data-collapse-toggle="a"
+                                onClick={toggleUsers}
                             >
                                 <FiUsers className="h-6 w-6 " />
                                 <span
@@ -46,7 +56,12 @@ const Sidebar = ({ auth }) => {
                                 <MdKeyboardArrowDown className="w-6 h-6" />
                             </button>
 
-                            <ul id="a" className="hidden py-2 space-y-2">
+                            <ul
+                                id="a"
+                                className={` ${
+                                    isOpenUsers ? "block" : "hidden"
+                                } py-2 space-y-2`}
+                            >
                                 <li>
                                     <a
                                         href="/users"
@@ -69,9 +84,8 @@ const Sidebar = ({ auth }) => {
                     <li>
                         <button
                             type="button"
+                            onClick={toggleAgents}
                             className="flex items-center p-2 w-full gap-x-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                            aria-controls="agents"
-                            data-collapse-toggle="agents"
                         >
                             <RiUser2Line className="h-6 w-6 " />
                             <span
@@ -82,7 +96,13 @@ const Sidebar = ({ auth }) => {
                             </span>
                             <MdKeyboardArrowDown className="w-6 h-6" />
                         </button>
-                        <ul id="agents" className="hidden py-2 space-y-2">
+
+                        <ul
+                            id="agents"
+                            className={`py-2 space-y-2 ${
+                                isOpenAgents ? "block" : "hidden"
+                            } `}
+                        >
                             <li>
                                 <a
                                     href="/agents"
@@ -107,8 +127,7 @@ const Sidebar = ({ auth }) => {
                         <button
                             type="button"
                             className="flex items-center p-2 w-full gap-x-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                            aria-controls="invoices"
-                            data-collapse-toggle="invoices"
+                            onClick={toggleInvoice}
                         >
                             <AiOutlineShoppingCart className="h-6 w-6 " />
                             <span
@@ -119,10 +138,15 @@ const Sidebar = ({ auth }) => {
                             </span>
                             <MdKeyboardArrowDown className="w-6 h-6" />
                         </button>
-                        <ul id="invoices" className="hidden py-2 space-y-2">
+                        <ul
+                            id="invoices"
+                            className={` ${
+                                isOpenInvoice ? "block" : "hidden"
+                            } py-2 space-y-2`}
+                        >
                             <li>
                                 <a
-                                    href="/invoices"
+                                    href="/invoice"
                                     className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                                 >
                                     إدارة الفواتير
@@ -140,7 +164,7 @@ const Sidebar = ({ auth }) => {
                             ) : null}
                             <li>
                                 <a
-                                    href="/invoices/return"
+                                    href="/invoice/return"
                                     className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                                 >
                                     الفواتير المرتجعة
@@ -152,8 +176,7 @@ const Sidebar = ({ auth }) => {
                         <button
                             type="button"
                             className="flex items-center p-2 w-full gap-x-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                            aria-controls="shippings"
-                            data-collapse-toggle="shippings"
+                            onClick={toggleShipping}
                         >
                             <AiOutlineFileText className="h-6 w-6 " />
                             <span
@@ -164,7 +187,12 @@ const Sidebar = ({ auth }) => {
                             </span>
                             <MdKeyboardArrowDown className="w-6 h-6" />
                         </button>
-                        <ul id="shippings" className="hidden py-2 space-y-2">
+                        <ul
+                            id="shippings"
+                            className={` ${
+                                isOpenShipping ? "block" : "hidden"
+                            } py-2 space-y-2`}
+                        >
                             <li>
                                 <a
                                     href="/shippings"

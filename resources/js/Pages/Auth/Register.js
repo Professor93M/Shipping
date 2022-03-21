@@ -135,7 +135,7 @@ export default function Register({ auth }) {
 
                 <div className="flex items-center justify-around mt-4">
                     <Button primary processing={processing}>
-                        اضافة
+                        {auth.user ? "تسجيل" : "إضافة"}
                     </Button>
                     <Button type="button" handleClick={handleClick}>
                         رجوع

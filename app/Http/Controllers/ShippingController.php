@@ -16,7 +16,7 @@ class ShippingController extends Controller
         return Inertia::render('Shippings/Index', [
             'shippings' => $shippings,
             'columns' => [
-                '#' => 'id',
+                'id' => '#',
                 'name' => 'الاسم',
                 'num' => 'رقم الامر',
                 'shipdate' => 'تاريخ الشحن',

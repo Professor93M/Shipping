@@ -4,6 +4,8 @@ use App\Http\Controllers\AgentsController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\InoviceController;
+use App\Http\Controllers\ShippingController;
+use App\Http\Controllers\StatusController;
 use Illuminate\Support\Facades\Route;
 
 

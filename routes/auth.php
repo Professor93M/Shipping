@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\AgentsController;
-use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\InoviceController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -20,7 +20,7 @@ Route::middleware('auth')->group(function () {
                 ->name('logout');
 
     // InvoiceController +++++++++++++++++++++++++++++++++++++++++++
-    Route::get('invoice/index', [InvoiceController::class, 'index'])
+    Route::get('invoice', [InoviceController::class, 'index'])
                 ->name('invoice.index');
     Route::get('invoice/create', [InoviceController::class, 'create'])
                 ->name('invoice.create');
@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('invoice/destroy/{id}', [InoviceController::class, 'destroy']);
 
     // AgentsController +++++++++++++++++++++++++++++++++++++++++++
-    Route::get('agents/index', [AgentsController::class, 'index'])
+    Route::get('agents', [AgentsController::class, 'index'])
                 ->name('agents.index');
     Route::get('agents/create', [AgentsController::class, 'create']);
     Route::post('agents/store', [AgentsController::class, 'store']);
@@ -40,7 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('agents/destroy/{id}', [AgentsController::class, 'destroy']);
 
     // ShippingController +++++++++++++++++++++++++++++++++++++++++++
-    Route::get('shipping/index', [ShippingController::class, 'index'])
+    Route::get('shipping', [ShippingController::class, 'index'])
                 ->name('shipping.index');
     Route::get('shipping/create', [ShippingController::class, 'create']);
     Route::post('shipping/store', [ShippingController::class, 'store']);
@@ -49,7 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('shipping/destroy/{id}', [ShippingController::class, 'destroy']);
 
     // StatusController +++++++++++++++++++++++++++++++++++++++++++
-    Route::get('status/index', [StatusController::class, 'index'])
+    Route::get('status', [StatusController::class, 'index'])
                 ->name('status.index');
     Route::get('status/create', [StatusController::class, 'create']);
     Route::post('status/store', [StatusController::class, 'store']);

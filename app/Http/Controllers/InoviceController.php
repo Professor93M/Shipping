@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Inovice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -9,13 +10,13 @@ use Inertia\Inertia;
 class InoviceController extends Controller
 {
     public function index(){
-        return Inertia::render('Inovice/Index',[
-            'invoice' => Invoice::all(),
+        return Inertia::render('Invoice/Index',[
+            'invoice' => Inovice::all(),
         ]);
     }
 
     public function create(){
-        return Inertia::render('Inovice/Create');
+        return Inertia::render('Invoice/Create');
     }
 
     public function store(Request $request){
@@ -25,13 +26,13 @@ class InoviceController extends Controller
             'agents_id' => 'required',
         ]);
 
-        Invoice::create($request->all());
+        Inovice::create($request->all());
         return Redirect::route('dashboard');
     }
 
     public function edit($id){
-        return Inertia::render('Inovice/Edit',[
-            'invoice' => Invoice::findOrFail($id),
+        return Inertia::render('Invoice/Edit',[
+            'invoice' => Inovice::findOrFail($id),
         ]);
     }
 
@@ -42,12 +43,12 @@ class InoviceController extends Controller
             'agents_id' => 'required',
         ]);
 
-        Invoice::findOrFail($id)->update($request->all());
+        Inovice::findOrFail($id)->update($request->all());
         return Redirect::route('dashboard');
     }
 
     public function destroy($id){
-        Invoice::findOrFail($id)->delete();
+        Inovice::findOrFail($id)->delete();
         return Redirect::route('dashboard');
     }
 }

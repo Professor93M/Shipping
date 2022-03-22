@@ -12,14 +12,12 @@ use Inertia\Inertia;
 class InoviceController extends Controller
 {
     public function index(){
-        // $d = Orders::with('users')->get();
-        // dd($d);
         return Inertia::render('Invoice/Index',[
             'invoice' => Orders::with('users')->get(),
             'columns' => [
                 'id' => 'رقم الفاتورة',
                 'totalprice' => 'مبلغ الفاتورة',
-                'users_id' => 'رقم العميل',
+                'users_id' => 'العميل',
                 'status' => 'حالة الفاتورة',
                 'created_at' => 'تاريخ الاضافة',
             ],

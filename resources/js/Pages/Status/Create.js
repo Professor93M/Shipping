@@ -40,7 +40,7 @@ const Create = (props) => {
         console.log(data);
     };
     return (
-        <Layout auth={props.auth} errors={props.errors} heading="إضافة عميل">
+        <Layout auth={props.auth} errors={props.errors} heading="إضافة حالة">
             <form onSubmit={submit} className="mt-12">
                 <div className="grid grid-cols-4 items-center justify-around gap-x-4 ">
                     <div className="col-span-1">
@@ -78,8 +78,6 @@ const Create = (props) => {
                         <input
                             name="color"
                             type="color"
-                            forInput="color"
-                            color
                             required
                             placeholder=" "
                             onChange={handleChange}

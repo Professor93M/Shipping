@@ -12,8 +12,20 @@ use Inertia\Inertia;
 class InoviceController extends Controller
 {
     public function index(){
-        return Inertia::render('Invoice/Index',[
-            'invoice' => Orders::with('users')->get(),
+        if(request('date_from') > request('date_to')){
+            $query = Orders::query();
+            $query->whereBetween('created_at', [request('date_to'), request('date_from')]);
+        }else{
+            $query = Orders::query();
+            $query->whereBetween('created_at', [request('date_from'), request('date_to')]);
+        }
+        if(request('order')){
+            $query = Orders::query();
+            $query = $query->where('users_id', 'LIKE', '%'.request('order').'%');
+        }
+        return Inertia::render('Items/Index', [
+            // 'items' => (request('date_from') && request('date_to')) || request('item') ? $query->with('categories')->where('inventory', false)->orWhere('inventory', null)->orderBy('created_at', 'desc')->paginate(10)->withQueryString() : Items::with('categories')->where('inventory', false)->orWhere('inventory', null)->orderBy('created_at', 'desc')->paginate(10)->withQueryString()
+            'invoice' => (request('date_from') && request('date_to')) || request('order') ? $query->with('users')->withQueryString() : Orders::with('users')->orderBy('created_at', 'desc')->withQueryString(),
             'columns' => [
                 'id' => 'رقم الفاتورة',
                 'totalprice' => 'مبلغ الفاتورة',
@@ -22,6 +34,17 @@ class InoviceController extends Controller
                 'created_at' => 'تاريخ الاضافة',
             ],
         ]);
+
+        // return Inertia::render('Invoice/Index',[
+        //     'invoice' => Orders::with('users')->get(),
+        //     'columns' => [
+        //         'id' => 'رقم الفاتورة',
+        //         'totalprice' => 'مبلغ الفاتورة',
+        //         'users_id' => 'العميل',
+        //         'status' => 'حالة الفاتورة',
+        //         'created_at' => 'تاريخ الاضافة',
+        //     ],
+        // ]);
     }
 
     public function create(){

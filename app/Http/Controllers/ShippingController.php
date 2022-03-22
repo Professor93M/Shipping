@@ -13,11 +13,9 @@ class ShippingController extends Controller
 {
     public function index()
     {
-        $shippings = Shipping::with('users')->get();
-        // $agents = User::where('pos', 'عميل')->get();
+        $shippings = Shipping::with('users')->with('actions')->with('statuses')->get();
         return Inertia::render('Shippings/Index', [
             'shippings' => $shippings,
-            // 'agents' => $agents,
             'columns' => [
                 'id' => '#',
                 'name' => 'الاسم',
@@ -25,6 +23,8 @@ class ShippingController extends Controller
                 'users_id' => 'العميل',
                 'shipdate' => 'تاريخ الشحن',
                 'created_at' => 'تاريخ الاضافة',
+                'statuses_id' => 'الحالة',
+                'actions_id' => 'الاجراء',
             ],
         ]);
     }

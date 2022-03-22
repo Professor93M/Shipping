@@ -29,14 +29,4 @@ class Inovice extends Model
     {
         return $this->belongsTo(Orders::class);
     }
-
-    public function statuses()
-    {
-        return $this->belongsTo(Statuses::class);
-    }
-
-    public function actions()
-    {
-        return $this->belongsTo(Actions::class);
-    }
 }

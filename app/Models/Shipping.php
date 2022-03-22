@@ -22,10 +22,22 @@ class Shipping extends Model
         'shipdesc',
         'weight',
         'users_id',
+        'statuses_id',
+        'actions_id',
     ];
 
     public function users()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function statuses()
+    {
+        return $this->belongsTo(Status::class);
+    }
+
+    public function actions()
+    {
+        return $this->belongsTo(Actions::class);
     }
 }

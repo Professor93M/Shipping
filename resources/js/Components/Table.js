@@ -3,10 +3,11 @@ import { useSortBy, useTable, usePagination } from "react-table";
 import { BiEdit, BiTrash } from "react-icons/bi";
 import { useGlobalFilter } from "react-table/dist/react-table.development";
 import { FiSearch } from "react-icons/fi";
+import { Inertia } from "@inertiajs/inertia";
 
 // import GlobalFilter from "./GlobalFilter";
 
-const ReactTable = ({ data, user, cols, arabicCols, show, paginate }) => {
+const ReactTable = ({ data, user, cols, arabicCols, url, show, paginate }) => {
     const columns = useMemo(
         () =>
             data[0]
@@ -24,6 +25,10 @@ const ReactTable = ({ data, user, cols, arabicCols, show, paginate }) => {
         return index >= 1 === 0;
     };
 
+    const getEdit = (index) => {
+        Inertia.get(`${url}/${index}`);
+    };
+
     const tableHooks = (hooks) => {
         hooks.visibleColumns.push((columns) => [
             ...columns,
@@ -33,7 +38,7 @@ const ReactTable = ({ data, user, cols, arabicCols, show, paginate }) => {
                 Cell: ({ row }) =>
                     show ? (
                         <FiSearch
-                            onClick={() => alert(row.values.id)}
+                            onClick={() => getEdit(row.values.id)}
                             className="bg-green-400  mx-auto hover:bg-green-500 text-slate-200 w-8 h-8 p-1 rounded-md cursor-pointer "
                         />
                     ) : (

@@ -34,6 +34,7 @@ const Index = ({ auth, errors, shippings, columns }) => {
                         data={data}
                         cols={cols}
                         show
+                        url="/shipping/edit"
                         arabicCols={columns}
                         paginate
                     />

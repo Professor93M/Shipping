@@ -27,13 +27,17 @@ const Index = ({ auth, errors, shippings, columns }) => {
                 </Link>
             </div>
             <div className=" mt-10">
-                <Table
-                    data={data}
-                    show
-                    cols={cols}
-                    arabicCols={columns}
-                    paginate
-                />
+                {data.length > 0 ? (
+                    <Table
+                        data={data}
+                        cols={cols}
+                        show
+                        arabicCols={columns}
+                        paginate
+                    />
+                ) : (
+                    <h3 className="text-center"> ليس لديك اوامر شحن بعد </h3>
+                )}
             </div>
         </Layout>
     );

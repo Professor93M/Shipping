@@ -27,13 +27,17 @@ const Index = ({ auth, errors, users, columns }) => {
                 </Link>
             </div>
             <div className=" mt-10">
-                <Table
-                    data={data}
-                    user
-                    cols={cols}
-                    arabicCols={columns}
-                    paginate
-                />
+                {data.length > 0 ? (
+                    <Table
+                        data={data}
+                        cols={cols}
+                        user
+                        arabicCols={columns}
+                        paginate
+                    />
+                ) : (
+                    <h3 className="text-center"> ليس لديك موظفين بعد </h3>
+                )}
             </div>
         </Layout>
     );

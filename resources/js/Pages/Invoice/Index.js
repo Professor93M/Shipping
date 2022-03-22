@@ -27,13 +27,16 @@ const Index = ({ auth, errors, invoice, columns }) => {
                 </Link>
             </div>
             <div className=" mt-10">
-                <Table
-                    data={data}
-                    show
-                    cols={cols}
-                    arabicCols={columns}
-                    paginate
-                />
+                {data.length > 0 ? (
+                    <Table
+                        data={data}
+                        cols={cols}
+                        arabicCols={columns}
+                        paginate
+                    />
+                ) : (
+                    <h3 className="text-center"> ليس لديك فواتير بعد </h3>
+                )}
             </div>
         </Layout>
     );

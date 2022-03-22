@@ -10,15 +10,22 @@ const Index = ({ auth, errors, statuses, columns }) => {
     const data = statuses.map((item) => {
         return {
             ...item,
-            // color: <p className={`bg-[${item.color}] w-4 h-4`}></p>,
             color: (
-                <input
-                    type="color"
-                    value={item.color}
-                    disabled
-                    // className={`bg-[${item.color}] w-4 h-4`}
-                />
+                <p
+                    style={{
+                        background: item.color,
+                    }}
+                    className={` w-12 h-6  mx-auto`}
+                ></p>
             ),
+            // color: (
+            //     <input
+            //         type="color"
+            //         value={item.color}
+            //         disabled
+            //         // className={`bg-[${item.color}] w-4 h-4`}
+            //     />
+            // ),
             created_at: moment(item.created_at).format("YYYY-MM-DD"),
         };
     });
@@ -36,13 +43,17 @@ const Index = ({ auth, errors, statuses, columns }) => {
                 </Link>
             </div>
             <div className=" mt-10">
-                <Table
-                    data={data}
-                    show
-                    cols={cols}
-                    arabicCols={columns}
-                    paginate
-                />
+                {data.length > 0 ? (
+                    <Table
+                        data={data}
+                        cols={cols}
+                        arabicCols={columns}
+                        show
+                        paginate
+                    />
+                ) : (
+                    <h3 className="text-center"> ليس لديك حالات بعد </h3>
+                )}
             </div>
         </Layout>
     );

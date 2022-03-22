@@ -13,11 +13,21 @@ class ShippingController extends Controller
 {
     public function index()
     {
-        $shippings = Shipping::with('users')->with('actions')->with('statuses')->get();
+        if(request('date_from') > request('date_to')){
+            $query = Shipping::query();
+            $query->whereBetween('created_at', [request('date_to'), request('date_from')]);
+        }else{
+            $query = Shipping::query();
+            $query->whereBetween('created_at', [request('date_from'), request('date_to')]);
+        }
+        if(request('id')){
+            $query = Shipping::query();
+            $query = $query->where('users_id', request('id'));
+        }
         return Inertia::render('Shippings/Index', [
-            'shippings' => $shippings,
+            'shippings' => (request('date_from') && request('date_to')) || request('id') ? $query->with('users')->with('actions')->with('statuses')->get() : Shipping::with('users')->with('actions')->with('statuses')->orderBy('created_at', 'desc')->get(),
             'columns' => [
-                'id' => '#',
+                'id' => 'رقم الشحنة',
                 'name' => 'الاسم',
                 'num' => 'رقم الامر',
                 'users_id' => 'العميل',

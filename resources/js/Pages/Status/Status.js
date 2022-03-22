@@ -3,7 +3,7 @@ import Table from "@/Components/Table";
 import Layout from "@/Layouts/Layout";
 import { Link } from "@inertiajs/inertia-react";
 import { FaRegFlag } from "react-icons/fa";
-import { HiOutlineClipboardList } from 'react-icons/hi'
+import { HiOutlineClipboardList } from "react-icons/hi";
 import moment from "moment";
 
 const Status = ({ auth, errors, shippings, columns }) => {
@@ -22,7 +22,7 @@ const Status = ({ auth, errors, shippings, columns }) => {
                     </h5>
                 </Link>
                 <Link
-                    href="/status/settings"
+                    href="/actions"
                     className="flex flex-col   items-center justify-center bg-white rounded-lg border shadow-md  w-1/3 h-64 hover:bg-default dark:border-dark dark:bg-muted dark:hover:bg-dark"
                 >
                     <span className="text-sm font-medium text-gray-600 dark:text-gray-400">

@@ -17,7 +17,10 @@ const Index = ({ auth, errors, shippings, columns }) => {
 
     const [search, setSearch] = useState("");
 
-    const unShow = auth.user.pos === "مدير" || auth.user.pos === "موظف";
+    const unShow =
+        auth.user.pos === "مدير" ||
+        auth.user.pos === "موظف" ||
+        auth.user.pos === "عميل";
 
     const cols = Object.keys(columns);
     const tabledata = shippings.map((item) => {
@@ -71,15 +74,17 @@ const Index = ({ auth, errors, shippings, columns }) => {
     return (
         <Layout auth={auth} errors={errors} heading="اوامر الشحن">
             <div className="grid grid-cols-2">
-                <div className="col-span-1 px-2">
-                    <Link
-                        href="/shipping/create"
-                        className="w-fit flex items-center gap-x-4 px-4 py-2 rounded-md bg-primary-default hover:bg-primary-dark text-muted"
-                    >
-                        <AiOutlinePlusCircle className="bg-inherit" />
-                        <span>إضافة فاتورة</span>
-                    </Link>
-                </div>
+                {auth.user.pos !== "سائق" && auth.user.pos !== "عميل" && (
+                    <div className="col-span-1 px-2">
+                        <Link
+                            href="/shipping/create"
+                            className="w-fit flex items-center gap-x-4 px-4 py-2 rounded-md bg-primary-default hover:bg-primary-dark text-muted"
+                        >
+                            <AiOutlinePlusCircle className="bg-inherit" />
+                            <span>إضافة فاتورة</span>
+                        </Link>
+                    </div>
+                )}
 
                 <div className=" px-2">
                     <FormItem

@@ -7,7 +7,16 @@ import { Inertia } from "@inertiajs/inertia";
 
 // import GlobalFilter from "./GlobalFilter";
 
-const ReactTable = ({ data, user, cols, arabicCols, url, show, paginate }) => {
+const ReactTable = ({
+    data,
+    user,
+    cols,
+    unShow,
+    arabicCols,
+    url,
+    show,
+    paginate,
+}) => {
     const columns = useMemo(
         () =>
             data[0]
@@ -48,16 +57,16 @@ const ReactTable = ({ data, user, cols, arabicCols, url, show, paginate }) => {
                         />
                     ),
             },
-            {
-                id: "delete",
-                Header: "حذف",
-                Cell: ({ row }) => (
-                    <BiTrash
-                        className="bg-red-400 mx-auto hover:bg-red-500 text-slate-200 w-8 h-8 p-1 rounded-md cursor-pointer "
-                        onClick={() => alert(row.values.id)}
-                    />
-                ),
-            },
+            // {
+            //     id: "delete",
+            //     Header: "حذف",
+            //     Cell: ({ row }) => (
+            //         <BiTrash
+            //             className="bg-red-400 mx-auto hover:bg-red-500 text-slate-200 w-8 h-8 p-1 rounded-md cursor-pointer "
+            //             onClick={() => alert(row.values.id)}
+            //         />
+            //     ),
+            // },
         ]);
     };
 
@@ -79,7 +88,7 @@ const ReactTable = ({ data, user, cols, arabicCols, url, show, paginate }) => {
         state,
     } = useTable(
         { columns: columns, data: data },
-        !user && tableHooks,
+        !user && unShow && tableHooks,
         // useGlobalFilter,
         useSortBy,
         usePagination

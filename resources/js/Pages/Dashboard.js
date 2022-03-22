@@ -29,7 +29,7 @@ export default function Dashboard({ auth, errors }) {
                     <span>إضافة عميل جديد</span>
                 </Link>
                 <Link
-                    href="/agents/create"
+                    href="/invoice/create"
                     className="w-fit flex items-center gap-x-4 px-4 py-2 rounded-md bg-primary-default hover:bg-primary-dark text-muted"
                 >
                     <AiOutlinePlusCircle className="bg-inherit" />

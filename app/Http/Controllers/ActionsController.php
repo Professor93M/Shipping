@@ -23,7 +23,7 @@ class ActionsController extends Controller
 
     public function create()
     {
-        return Inertia::render('Actions/Create');
+        return Inertia::render('Actions/Create',['agents' => User::where('pos', 'عميل')->get()]);
     }
 
     public function store(Request $request)
@@ -36,7 +36,7 @@ class ActionsController extends Controller
 
         $action = new Actions();
         $action->name = $request->name;
-        $action->users_id = Auth::user()->id;
+        $action->users_id = $request->agents_id;
         $action->save();
 
         return redirect()->route('actions.index');

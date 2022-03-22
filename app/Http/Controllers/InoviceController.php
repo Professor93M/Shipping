@@ -15,7 +15,7 @@ class InoviceController extends Controller
         // $d = Orders::with('users')->get();
         // dd($d);
         return Inertia::render('Invoice/Index',[
-            'invoice' => Orders::all(),
+            'invoice' => Orders::with('users')->get(),
             'columns' => [
                 'id' => 'رقم الفاتورة',
                 'totalprice' => 'مبلغ الفاتورة',

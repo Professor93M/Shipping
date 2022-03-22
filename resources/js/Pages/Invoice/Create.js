@@ -75,8 +75,10 @@ const Create = (props) => {
 
     const removeInputs = (index) => {
         const newData = [...data.items];
-        newData.splice(index, 1);
-        setData({ ...data, items: newData });
+        if (newData.length > 1) {
+            newData.splice(index, 1);
+            setData({ ...data, items: newData });
+        }
     };
 
     return (
@@ -86,7 +88,7 @@ const Create = (props) => {
                     {data.items.map((item, index) => (
                         <div
                             key={index}
-                            className="col-span-4 flex items-center gap-4"
+                            className="col-span-4 flex items-center gap-x-4"
                         >
                             <FormItem
                                 name="type"

@@ -16,7 +16,7 @@ export default function Register({ auth }) {
         sname: "",
         phone: "",
         address: "",
-        pos: "",
+        pos: auth.user.pos === "موظف" ? "عميل" : "",
     });
 
     useEffect(() => {
@@ -53,6 +53,9 @@ export default function Register({ auth }) {
         },
     ];
     const types = [
+        {
+            name: "",
+        },
         {
             name: "شركة",
         },
@@ -125,7 +128,7 @@ export default function Register({ auth }) {
                     placeholder=" "
                     handleChange={handleChange}
                 />
-                {auth.user && (
+                {auth.user.pos === "مدير" && (
                     <FormItem>
                         <Combo
                             className={
@@ -142,20 +145,25 @@ export default function Register({ auth }) {
                     </FormItem>
                 )}
                 {auth.user && (
-                    <FormItem>
-                        <Combo
-                            className={
-                                "block w-full text-sm  text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-default focus:outline-none focus:ring-0 font-semibold focus:border-dark peer"
-                            }
-                            name="type"
-                            add
-                            options={types}
-                            placeholder="النوع"
-                            handleChange={(e) => {
-                                handleChange(e);
-                            }}
-                        />
-                    </FormItem>
+                    <>
+                        <FormItem>
+                            <Combo
+                                className={
+                                    "block w-full text-sm  text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-default focus:outline-none focus:ring-0 font-semibold focus:border-dark peer"
+                                }
+                                name="type"
+                                add
+                                options={types}
+                                placeholder="النوع"
+                                handleChange={(e) => {
+                                    handleChange(e);
+                                }}
+                            />
+                            <small className="-mt-10 text-gray-400">
+                                يمكن ترك هذا الحقل فارغ
+                            </small>
+                        </FormItem>
+                    </>
                 )}
 
                 <div className="flex items-center justify-around mt-4">

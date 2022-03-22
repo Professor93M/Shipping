@@ -10,11 +10,13 @@ const Index = ({ auth, errors, shippings, columns }) => {
     const data = shippings.map((item) => {
         return {
             ...item,
+            users_id: item.users.name,
             created_at: moment(item.created_at).format("YYYY-MM-DD"),
             status: item.status === null ? "غير مدفوعة" : "مدفوعة",
         };
     });
 
+    console.log(data);
     return (
         <Layout auth={auth} errors={errors} heading="اوامر الشحن">
             <div className=" px-2">

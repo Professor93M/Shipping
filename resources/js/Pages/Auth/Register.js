@@ -16,7 +16,7 @@ export default function Register({ auth }) {
         sname: "",
         phone: "",
         address: "",
-        pos: auth.user.pos === "موظف" ? "عميل" : "",
+        pos: auth.user ? (auth.user.pos === "موظف" ? "عميل" : "") : "",
     });
 
     useEffect(() => {
@@ -128,7 +128,7 @@ export default function Register({ auth }) {
                     placeholder=" "
                     handleChange={handleChange}
                 />
-                {auth.user.pos === "مدير" && (
+                {auth.user && auth.user.pos === "مدير" && (
                     <FormItem>
                         <Combo
                             className={

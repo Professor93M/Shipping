@@ -20,12 +20,15 @@ const Create = (props) => {
         shipname: props.shipping.shipname || "",
         desc: props.shipping.desc || "",
         nameto: props.shipping.nameto || "",
+        agents_id: props.agents[0].id || "",
+        _method: "PUT",
     });
 
     const submit = (e) => {
         e.preventDefault();
 
-        post("/shipping/store");
+        post(`/shipping/update/${props.shipping.id}`);
+        // console.log(data);
     };
     const handleClick = () => {
         Inertia.get("/");
@@ -39,20 +42,6 @@ const Create = (props) => {
         );
     };
 
-    const handleAgent = (event) => {
-        const agentId = props.agents.filter((agent) => {
-            if (agent.name === event.target.value) {
-                return agent.id;
-            }
-        });
-
-        setData({
-            ...data,
-            agents_id: agentId[0].id,
-            // statuses_id: statusesId[0].id,
-            // actions_id: actionId[0].id,
-        });
-    };
     const handleAction = (event) => {
         const actionId = props.actions.filter((action) => {
             if (action.name === event.target.value) {
@@ -190,9 +179,8 @@ const Create = (props) => {
                                     name="agent_id"
                                     // add
                                     options={props.agents}
-                                    value={data.agent_id}
+                                    value={data.agents_id}
                                     placeholder="العميل"
-                                    handleChange={(e) => handleAgent(e)}
                                 />
                             </FormItem>
                         </div>

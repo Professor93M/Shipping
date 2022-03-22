@@ -17,6 +17,7 @@ class ActionsController extends Controller
             'columns' => [
                 'id' => '#',
                 'name' => 'الاسم',
+                'created_at' => 'تاريخ الاضافة',
             ],
         ]);
     }

@@ -37,16 +37,10 @@ Route::middleware('auth')->group(function () {
     Route::get('invoice/return', [InoviceController::class, 'return'])
                 ->name('invoice.return');
     // Route::put('invoice/update/{id}', [InoviceController::class, 'update']);
-    Route::delete('invoice/destroy/{id}', [InoviceController::class, 'destroy']);
 
     // AgentsController +++++++++++++++++++++++++++++++++++++++++++
     Route::get('agents', [AgentsController::class, 'index'])
                 ->name('agents.index');
-    // Route::get('agents/create', [AgentsController::class, 'create']);
-    // Route::post('agents/store', [AgentsController::class, 'store']);
-    // Route::get('agents/edit/{id}', [AgentsController::class, 'edit']);
-    // Route::put('agents/update/{id}', [AgentsController::class, 'update']);
-    // Route::delete('agents/destroy/{id}', [AgentsController::class, 'destroy']);
 
     // ActionsController +++++++++++++++++++++++++++++++++++++++++++
     Route::get('actions', [ActionsController::class, 'index'])
@@ -61,7 +55,6 @@ Route::middleware('auth')->group(function () {
     Route::post('shipping/store', [ShippingController::class, 'store']);
     Route::get('shipping/edit/{id}', [ShippingController::class, 'edit']);
     Route::put('shipping/update/{id}', [ShippingController::class, 'update']);
-    Route::delete('shipping/destroy/{id}', [ShippingController::class, 'destroy']);
 
     // StatusController +++++++++++++++++++++++++++++++++++++++++++
     Route::get('status', [StatusController::class, 'status'])

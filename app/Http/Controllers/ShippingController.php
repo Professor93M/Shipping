@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Actions;
 use App\Models\Shipping;
+use App\Models\Status;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class ShippingController extends Controller
@@ -55,28 +56,21 @@ class ShippingController extends Controller
     public function edit($id)
     {
         $shipping = Shipping::find($id);
-        return Inertia::render('Shippings/Edit', ['shipping' => $shipping,'agents' => User::where('pos', 'عميل')->get()]);
+        return Inertia::render('Shippings/Edit', [
+            'shipping' => $shipping,
+            'agents' => User::where('pos', 'عميل')->get(),
+            'statuses' => Status::all(),
+            'actions' => Actions::all(),
+        ]);
     }
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-            'num' => 'required',
-            'shipdate' => 'required',
-            'users_id' => 'required',
-        ],[
-            'name.required' => 'يجب ادخال اسم الشحن',
-            'num.required' => 'يجب ادخال رقم الشحن',
-            'shipdate.required' => 'يجب ادخال تاريخ الشحن',
-            'users_id.required' => 'يجب تحديد العميل',
-        ]);
-    
         $shipping = Shipping::find($id);
         $shipping->name = $request->name;
         $shipping->num = $request->num;
         $shipping->shipdate = $request->shipdate;
-        $shiping->arvdate = $request->arvdate;
+        $shipping->arvdate = $request->arvdate;
         $shipping->desc = $request->desc;
         $shipping->nameto = $request->nameto;
         $shipping->address = $request->address;
@@ -85,6 +79,8 @@ class ShippingController extends Controller
         $shipping->shipdesc = $request->shipdesc;
         $shipping->weight = $request->weight;
         $shipping->users_id = $request->agents_id;
+        $shipping->statuses_id = $request->statuses_id;
+        $shipping->actions_id = $request->actions_id;
         $shipping->save();
 
         return redirect()->route('shippings.index');

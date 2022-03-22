@@ -21,12 +21,11 @@ class Shipping extends Model
         'shipname',
         'shipdesc',
         'weight',
-        'agents_id',
         'users_id',
     ];
 
     public function users()
     {
-        return $this->belongsTo(Users::class);
+        return $this->belongsTo(User::class);
     }
 }

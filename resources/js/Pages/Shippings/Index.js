@@ -16,7 +16,7 @@ const Index = ({ auth, errors, shippings, columns }) => {
     });
 
     return (
-        <Layout auth={auth} errors={errors} heading="الفواتير">
+        <Layout auth={auth} errors={errors} heading="اوامر الشحن">
             <div className=" px-2">
                 <Link
                     href="/shipping/create"

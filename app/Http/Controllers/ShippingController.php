@@ -12,11 +12,11 @@ class ShippingController extends Controller
 {
     public function index()
     {
-        $shippings = Shipping::all();
-        $agents = User::where('pos', 'عميل')->get();
+        $shippings = Shipping::with('users')->get();
+        // $agents = User::where('pos', 'عميل')->get();
         return Inertia::render('Shippings/Index', [
             'shippings' => $shippings,
-            'agents' => $agents,
+            // 'agents' => $agents,
             'columns' => [
                 'id' => '#',
                 'name' => 'الاسم',
@@ -35,18 +35,6 @@ class ShippingController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'num' => 'required',
-            'shipdate' => 'required',
-            'users_id' => 'required',
-        ],[
-            'name.required' => 'يجب ادخال اسم الشحن',
-            'num.required' => 'يجب ادخال رقم الشحن',
-            'shipdate.required' => 'يجب ادخال تاريخ الشحن',
-            'users_id.required' => 'يجب تحديد العميل',
-        ]);
-    
         $shipping = new Shipping();
         $shipping->name = $request->name;
         $shipping->num = $request->num;
@@ -59,8 +47,7 @@ class ShippingController extends Controller
         $shipping->shipname = $request->shipname;
         $shipping->shipdesc = $request->shipdesc;
         $shipping->weight = $request->weight;
-        $shipping->agents_id = $request->agents_id;
-        $shipping->users_id = Auth::user()->id;
+        $shipping->users_id = $request->agents_id;
         $shipping->save();
         return redirect()->route('shippings.index');
     }

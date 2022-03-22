@@ -18,6 +18,7 @@ class AgentsController extends Controller
             'columns' => [
                 'id' => 'رقم العميل',
                 'name' => 'الاسم',
+                'type' => 'النوع',
                 'phone' => 'رقم الهاتف',
                 'address' => 'العنوان',
                 'country' => 'الدولة',

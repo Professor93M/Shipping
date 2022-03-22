@@ -21,8 +21,8 @@ class CreateInovicesTable extends Migration
             $table->string('qty')->nullable();
             $table->string('discount')->nullable();
             $table->string('status')->nullable();
-            $table->bigInteger('orders_id')->unsigned();
-            $table->foreign('orders_id')->references('id')->on('orders');
+            $table->bigInteger('orders_id')->unsigned()->nullable();
+            $table->foreign('orders_id')->references('id')->on('orders')->nullOnDelete()->onUpdate('SET NULL');
             $table->bigInteger('statuses_id')->unsigned()->nullable();
             $table->foreign('statuses_id')->references('id')->on('statuses');
             $table->bigInteger('actions_id')->unsigned()->nullable();

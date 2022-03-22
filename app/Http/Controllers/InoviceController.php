@@ -14,7 +14,6 @@ class InoviceController extends Controller
     public function index(){
         // $d = Orders::with('users')->get();
         // dd($d);
-
         return Inertia::render('Invoice/Index',[
             'invoice' => Orders::all(),
             'columns' => [

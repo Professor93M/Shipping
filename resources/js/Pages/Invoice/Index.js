@@ -10,6 +10,7 @@ const Index = ({ auth, errors, invoice, columns }) => {
     const data = invoice.map((item) => {
         return {
             ...item,
+            users_id: item.users.name,
             created_at: moment(item.created_at).format("YYYY-MM-DD"),
             status: item.status === null ? "غير مدفوعة" : "مدفوعة",
         };

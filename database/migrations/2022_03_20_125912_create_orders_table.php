@@ -17,8 +17,8 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->string('totalprice');
             $table->string('status')->nullable();
-            $table->bigInteger('agents_id')->unsigned();
-            $table->foreign('agents_id')->references('id')->on('agents')->onDelete('cascade')->onUpdate('cascade');
+            $table->bigInteger('users_id')->unsigned();
+            $table->foreign('users_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

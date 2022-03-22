@@ -12,11 +12,16 @@ class Orders extends Model
     protected $fillable = [
         'totalprice',
         'status',
-        'agents_id',
+        'users_id',
     ];
     
     public function invoice()
     {
         return $this->hasMany(Inovice::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class);
     }
 }

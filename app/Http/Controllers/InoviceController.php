@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Agents;
 use App\Models\Inovice;
 use App\Models\Orders;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -12,12 +12,15 @@ use Inertia\Inertia;
 class InoviceController extends Controller
 {
     public function index(){
+        // $d = Orders::with('users')->get();
+        // dd($d);
+
         return Inertia::render('Invoice/Index',[
             'invoice' => Orders::all(),
             'columns' => [
                 'id' => 'رقم الفاتورة',
                 'totalprice' => 'مبلغ الفاتورة',
-                'agents_id' => 'العميل',
+                'users_id' => 'رقم العميل',
                 'status' => 'حالة الفاتورة',
                 'created_at' => 'تاريخ الاضافة',
             ],
@@ -25,12 +28,11 @@ class InoviceController extends Controller
     }
 
     public function create(){
-        return Inertia::render('Invoice/Create',['agents' => Agents::all()]);
+        return Inertia::render('Invoice/Create',['agents' => User::where('pos', 'عميل')->get()]);
     }
 
     public function store(Request $request){
         $order = Orders::latest()->first('id');
-        // for ($i = 0; $i < count($request->all()) ; $i++){
         foreach($request->items as $key => $req){
             Inovice::create([
                 'type' => $req['type'],
@@ -46,7 +48,7 @@ class InoviceController extends Controller
     
         Orders::create([
             'totalprice' => $request->total,
-            'agents_id' => $request->agent_id,
+            'users_id' => $request->agent_id,
         ]);
 
         return Redirect::route('invoice.index');
@@ -62,5 +64,19 @@ class InoviceController extends Controller
     public function destroy($id){
         Orders::findOrFail($id)->delete();
         return Redirect::route('invoice.index');
+    }
+
+    public function return(){
+        return Inertia::render('Invoice/Return', [
+            'invocie' => Orders::with('users')->where('status', 'مرتجع')->get(),
+            'columns' => [
+                'id' => 'رقم الفاتورة',
+                'totalprice' => 'مبلغ الفاتورة',
+                'users_id' => 'رقم العميل',
+                'status' => 'حالة الفاتورة',
+                'created_at' => 'تاريخ الاضافة',
+                'updated_at' => 'تاريخ الارجاع',
+            ]
+        ]);
     }
 }

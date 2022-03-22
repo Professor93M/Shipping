@@ -15,7 +15,7 @@ class Controller extends BaseController
 
     public function index(){
         return Inertia::render('Auth/Index', [
-            'users' => User::all(),
+            'users' => User::where('pos', '!=', 'عميل')->get(),
             'columns' => [
                 'id' => '#',
                 'name' => 'الاسم الكامل',

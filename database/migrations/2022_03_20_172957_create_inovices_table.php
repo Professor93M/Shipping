@@ -15,16 +15,20 @@ class CreateInovicesTable extends Migration
     {
         Schema::create('inovices', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('type');
+            $table->string('type')->default('شحنة');
             $table->string('desc')->nullable();
-            $table->string('price');
+            $table->string('price')->default('0');
             $table->string('qty')->nullable();
             $table->string('discount')->nullable();
             $table->string('status')->nullable();
             $table->bigInteger('orders_id')->unsigned();
             $table->foreign('orders_id')->references('id')->on('orders');
+            $table->bigInteger('statuses_id')->unsigned()->nullable();
+            $table->foreign('statuses_id')->references('id')->on('statuses');
+            $table->bigInteger('actions_id')->unsigned()->nullable();
+            $table->foreign('actions_id')->references('id')->on('actions');
             $table->bigInteger('users_id')->unsigned();
-            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('users_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

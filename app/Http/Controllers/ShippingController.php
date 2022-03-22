@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Agents;
 use App\Models\Shipping;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -13,12 +13,15 @@ class ShippingController extends Controller
     public function index()
     {
         $shippings = Shipping::all();
+        $agents = User::where('pos', 'عميل')->get();
         return Inertia::render('Shippings/Index', [
             'shippings' => $shippings,
+            'agents' => $agents,
             'columns' => [
                 'id' => '#',
                 'name' => 'الاسم',
                 'num' => 'رقم الامر',
+                'users_id' => 'العميل',
                 'shipdate' => 'تاريخ الشحن',
                 'created_at' => 'تاريخ الاضافة',
             ],
@@ -27,7 +30,7 @@ class ShippingController extends Controller
 
     public function create()
     {
-        return Inertia::render('Shippings/Create', ['agents' => Agents::all()]);
+        return Inertia::render('Shippings/Create', ['agents' => User::where('pos', 'عميل')->get()]);
     }
 
     public function store(Request $request)
@@ -36,12 +39,12 @@ class ShippingController extends Controller
             'name' => 'required',
             'num' => 'required',
             'shipdate' => 'required',
-            'agents_id' => 'required',
+            'users_id' => 'required',
         ],[
             'name.required' => 'يجب ادخال اسم الشحن',
             'num.required' => 'يجب ادخال رقم الشحن',
             'shipdate.required' => 'يجب ادخال تاريخ الشحن',
-            'agents_id.required' => 'يجب تحديد العميل',
+            'users_id.required' => 'يجب تحديد العميل',
         ]);
     
         $shipping = new Shipping();
@@ -65,7 +68,7 @@ class ShippingController extends Controller
     public function edit($id)
     {
         $shipping = Shipping::find($id);
-        return Inertia::render('Shippings/Edit', ['shipping' => $shipping,'agents' => Agents::all()]);
+        return Inertia::render('Shippings/Edit', ['shipping' => $shipping,'agents' => User::where('pos', 'عميل')->get()]);
     }
 
     public function update(Request $request, $id)
@@ -74,12 +77,12 @@ class ShippingController extends Controller
             'name' => 'required',
             'num' => 'required',
             'shipdate' => 'required',
-            'agents_id' => 'required',
+            'users_id' => 'required',
         ],[
             'name.required' => 'يجب ادخال اسم الشحن',
             'num.required' => 'يجب ادخال رقم الشحن',
             'shipdate.required' => 'يجب ادخال تاريخ الشحن',
-            'agents_id.required' => 'يجب تحديد العميل',
+            'users_id.required' => 'يجب تحديد العميل',
         ]);
     
         $shipping = Shipping::find($id);
@@ -94,8 +97,7 @@ class ShippingController extends Controller
         $shipping->shipname = $request->shipname;
         $shipping->shipdesc = $request->shipdesc;
         $shipping->weight = $request->weight;
-        $shipping->agents_id = $request->agents_id;
-        $shipping->users_id = Auth::user()->id;
+        $shipping->users_id = $request->agents_id;
         $shipping->save();
 
         return redirect()->route('shippings.index');

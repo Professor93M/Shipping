@@ -15,9 +15,9 @@ class CreateShippingsTable extends Migration
     {
         Schema::create('shippings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('num');
-            $table->date('shipdate');
+            $table->string('name')->default('شحنة جديدة');
+            $table->string('num')->default('0');
+            $table->date('shipdate')->default('2020-01-01');
             $table->date('arvdate')->nullable();
             $table->string('desc')->nullable();
             $table->string('nameto')->nullable();
@@ -26,10 +26,8 @@ class CreateShippingsTable extends Migration
             $table->string('shipname')->nullable();
             $table->string('shipdesc')->nullable();
             $table->string('weight')->nullable();
-            $table->bigInteger('agents_id')->unsigned();
-            $table->foreign('agents_id')->references('id')->on('agents')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('users_id')->unsigned();
-            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('users_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

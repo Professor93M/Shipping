@@ -40,7 +40,6 @@ const Create = (props) => {
     const submit = (e) => {
         e.preventDefault();
 
-        // console.log(data);
         post("/invoice/store");
     };
     const handleClick = () => {
@@ -57,7 +56,6 @@ const Create = (props) => {
                 return agent.id;
             }
         });
-
         setData({ ...data, agent_id: agentId[0].id });
     };
 

@@ -19,10 +19,9 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'note',
         'phone',
         'address',
-        'country',
+        'type',
         'pos',
         'email',
         'password',
@@ -47,11 +46,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function agents()
-    {
-        return $this->hasMany(Agents::class);
-    }
-
     public function inovices()
     {
         return $this->hasMany(Inovice::class);
@@ -65,5 +59,15 @@ class User extends Authenticatable
     public function shipping()
     {
         return $this->hasMany(Shipping::class);
+    }
+
+    public function actions()
+    {
+        return $this->hasMany(Actions::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Orders::class);
     }
 }

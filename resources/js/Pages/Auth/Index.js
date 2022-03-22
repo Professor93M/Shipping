@@ -19,7 +19,7 @@ const Index = ({ auth, errors, users, columns }) => {
         <Layout auth={auth} errors={errors} heading="الموظفين">
             <div className=" px-2">
                 <Link
-                    href="/users/create"
+                    href="/register"
                     className="w-fit flex items-center gap-x-4 px-4 py-2 rounded-md bg-primary-default hover:bg-primary-dark text-muted"
                 >
                     <AiOutlinePlusCircle className="bg-inherit" />

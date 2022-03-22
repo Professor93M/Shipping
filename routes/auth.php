@@ -33,17 +33,25 @@ Route::middleware('auth')->group(function () {
     Route::post('invoice/store', [InoviceController::class, 'store']);
     Route::get('invoice/show/{id}', [InoviceController::class, 'show'])
                 ->name('invoice.show');
+    Route::get('invoice/return', [InoviceController::class, 'return'])
+                ->name('invoice.return');
     // Route::put('invoice/update/{id}', [InoviceController::class, 'update']);
     Route::delete('invoice/destroy/{id}', [InoviceController::class, 'destroy']);
 
     // AgentsController +++++++++++++++++++++++++++++++++++++++++++
     Route::get('agents', [AgentsController::class, 'index'])
                 ->name('agents.index');
-    Route::get('agents/create', [AgentsController::class, 'create']);
-    Route::post('agents/store', [AgentsController::class, 'store']);
-    Route::get('agents/edit/{id}', [AgentsController::class, 'edit']);
-    Route::put('agents/update/{id}', [AgentsController::class, 'update']);
-    Route::delete('agents/destroy/{id}', [AgentsController::class, 'destroy']);
+    // Route::get('agents/create', [AgentsController::class, 'create']);
+    // Route::post('agents/store', [AgentsController::class, 'store']);
+    // Route::get('agents/edit/{id}', [AgentsController::class, 'edit']);
+    // Route::put('agents/update/{id}', [AgentsController::class, 'update']);
+    // Route::delete('agents/destroy/{id}', [AgentsController::class, 'destroy']);
+
+    // ActionsController +++++++++++++++++++++++++++++++++++++++++++
+    Route::get('actions', [ActionsController::class, 'index'])
+                ->name('actions.index');
+    Route::get('actions/create', [ActionsController::class, 'create']);
+    Route::post('actions/store', [ActionsController::class, 'store']);
 
     // ShippingController +++++++++++++++++++++++++++++++++++++++++++
     Route::get('shipping', [ShippingController::class, 'index'])
@@ -66,7 +74,9 @@ Route::middleware('auth')->group(function () {
                 ->name('statuses.index');
 });
 
-Route::get('register', [RegisteredUserController::class, 'create'])
+Route::middleware('admin')->group(function (){
+    Route::get('register', [RegisteredUserController::class, 'create'])
     ->name('register');
 
-Route::post('register', [RegisteredUserController::class, 'store']);
+    Route::post('register', [RegisteredUserController::class, 'store']);
+});

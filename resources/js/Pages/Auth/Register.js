@@ -16,7 +16,6 @@ export default function Register({ auth }) {
         sname: "",
         phone: "",
         address: "",
-        country: "",
         pos: "",
     });
 
@@ -49,8 +48,18 @@ export default function Register({ auth }) {
         {
             name: "موظف",
         },
+        {
+            name: "عميل",
+        },
     ];
-
+    const types = [
+        {
+            name: "شركة",
+        },
+        {
+            name: "شخص",
+        },
+    ];
     const submit = (e) => {
         e.preventDefault();
 
@@ -108,10 +117,10 @@ export default function Register({ auth }) {
                     handleChange={handleChange}
                 />
                 <FormItem
-                    name="country"
-                    type="text"
-                    label="البلد"
-                    forInput="country"
+                    name="phone"
+                    type="tel"
+                    label="الهاتف"
+                    forInput="phone"
                     required
                     placeholder=" "
                     handleChange={handleChange}
@@ -132,10 +141,26 @@ export default function Register({ auth }) {
                         />
                     </FormItem>
                 )}
+                {auth.user && (
+                    <FormItem>
+                        <Combo
+                            className={
+                                "block w-full text-sm  text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-default focus:outline-none focus:ring-0 font-semibold focus:border-dark peer"
+                            }
+                            name="type"
+                            add
+                            options={types}
+                            placeholder="النوع"
+                            handleChange={(e) => {
+                                handleChange(e);
+                            }}
+                        />
+                    </FormItem>
+                )}
 
                 <div className="flex items-center justify-around mt-4">
                     <Button primary processing={processing}>
-                        {auth.user ? "تسجيل" : "إضافة"}
+                        {auth.user ? "اضافة" : "تسجيل"}
                     </Button>
                     <Button type="button" handleClick={handleClick}>
                         رجوع

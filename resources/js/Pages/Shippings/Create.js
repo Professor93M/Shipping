@@ -45,7 +45,7 @@ const Create = (props) => {
     };
 
     return (
-        <Layout auth={props.auth} errors={props.errors} heading="إضافة عميل">
+        <Layout auth={props.auth} errors={props.errors} heading="إضافة عملية شحن">
             <form onSubmit={submit} className="mt-12">
                 <div className="grid grid-cols-4 items-center  justify-around gap-4 ">
                     <span>عملية الشحن</span>

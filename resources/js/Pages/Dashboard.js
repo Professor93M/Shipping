@@ -22,7 +22,7 @@ export default function Dashboard({ auth, errors }) {
             </div>
             <div className=" mt-12 px-2 flex items-center gap-x-8">
                 <Link
-                    href="/agents/create"
+                    href="/register"
                     className="w-fit flex items-center gap-x-4 px-4 py-2 rounded-md bg-primary-default hover:bg-primary-dark text-muted"
                 >
                     <AiOutlinePlusCircle className="bg-inherit" />

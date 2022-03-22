@@ -58,9 +58,8 @@ const Sidebar = ({ auth }) => {
 
                             <ul
                                 id="a"
-                                className={` ${
-                                    isOpenUsers ? "block" : "hidden"
-                                } py-2 space-y-2`}
+                                className={` ${isOpenUsers ? "block" : "hidden"
+                                    } py-2 space-y-2`}
                             >
                                 <li>
                                     <Link
@@ -72,7 +71,7 @@ const Sidebar = ({ auth }) => {
                                 </li>
                                 <li>
                                     <Link
-                                        href="/users/create"
+                                        href="/register"
                                         className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                                     >
                                         إضافة موظف
@@ -99,9 +98,8 @@ const Sidebar = ({ auth }) => {
 
                         <ul
                             id="agents"
-                            className={`py-2 space-y-2 ${
-                                isOpenAgents ? "block" : "hidden"
-                            } `}
+                            className={`py-2 space-y-2 ${isOpenAgents ? "block" : "hidden"
+                                } `}
                         >
                             <li>
                                 <Link
@@ -114,7 +112,7 @@ const Sidebar = ({ auth }) => {
                             {auth.user.pos !== "مدير" ? (
                                 <li>
                                     <Link
-                                        href="/agents/create"
+                                        href="/register"
                                         className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                                     >
                                         إضافة عميل
@@ -140,9 +138,8 @@ const Sidebar = ({ auth }) => {
                         </button>
                         <ul
                             id="invoices"
-                            className={` ${
-                                isOpenInvoice ? "block" : "hidden"
-                            } py-2 space-y-2`}
+                            className={` ${isOpenInvoice ? "block" : "hidden"
+                                } py-2 space-y-2`}
                         >
                             <li>
                                 <Link
@@ -189,9 +186,8 @@ const Sidebar = ({ auth }) => {
                         </button>
                         <ul
                             id="shippings"
-                            className={` ${
-                                isOpenShipping ? "block" : "hidden"
-                            } py-2 space-y-2`}
+                            className={` ${isOpenShipping ? "block" : "hidden"
+                                } py-2 space-y-2`}
                         >
                             <li>
                                 <Link
@@ -204,7 +200,7 @@ const Sidebar = ({ auth }) => {
                             {auth.user.pos !== "مدير" ? (
                                 <li>
                                     <Link
-                                        href="/shippings/create"
+                                        href="/shipping/create"
                                         className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                                     >
                                         اضف امر شغل

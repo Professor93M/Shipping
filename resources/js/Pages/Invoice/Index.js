@@ -10,7 +10,7 @@ import { Inertia } from "@inertiajs/inertia";
 import Input from "@/Components/Input";
 
 const Index = ({ auth, errors, invoice, columns }) => {
-    const { data, setData, post, processing, reset } = useForm({
+    const { data, setData, get, processing, reset } = useForm({
         date_from: "",
         date_to: "",
     });
@@ -28,7 +28,7 @@ const Index = ({ auth, errors, invoice, columns }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        Inertia.get(
+        get(
             `/invoice?`,
             { date_from: data.from, date_to: data.to },
             { replaces: true, preserveState: true }
@@ -50,12 +50,10 @@ const Index = ({ auth, errors, invoice, columns }) => {
         setSearch(e.target.value);
     };
     const dateFilter = (event) => {
-        setData(
-            event.target.name,
-            event.target.type === "checkbox"
-                ? event.target.checked
-                : event.target.value
-        );
+        setData({
+            ...data,
+            [event.target.name]: event.target.value,
+        });
     };
 
     return (
@@ -90,16 +88,18 @@ const Index = ({ auth, errors, invoice, columns }) => {
                             <Input
                                 type="date"
                                 name="date_from"
+                                value={data.date_from}
                                 className=" text-sm  text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-default focus:outline-none focus:ring-0 font-semibold focus:border-dark"
-                                onChange={dateFilter}
+                                handleChange={dateFilter}
                             />
 
                             <label htmlFor="date_from">الى :</label>
                             <Input
                                 type="date"
                                 name="date_to"
+                                value={data.date_to}
                                 className=" text-sm  text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-default focus:outline-none focus:ring-0 font-semibold focus:border-dark"
-                                onChange={dateFilter}
+                                handleChange={dateFilter}
                             />
                         </div>
 

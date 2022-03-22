@@ -19,6 +19,7 @@ class Controller extends BaseController
             'columns' => [
                 'id' => '#',
                 'name' => 'الاسم الكامل',
+                'pos' => 'المسمي',
                 'email' => 'البريد الالكتروني',
                 'created_at' => 'تاريخ الاضافة',
             ],

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActionsController;
 use App\Http\Controllers\AgentsController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;

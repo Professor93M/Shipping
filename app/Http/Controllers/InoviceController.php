@@ -23,7 +23,7 @@ class InoviceController extends Controller
             $query = Orders::query();
             $query = $query->where('users_id', 'LIKE', '%'.request('order').'%');
         }
-        return Inertia::render('Items/Index', [
+        return Inertia::render('Invoice/Index', [
             // 'items' => (request('date_from') && request('date_to')) || request('item') ? $query->with('categories')->where('inventory', false)->orWhere('inventory', null)->orderBy('created_at', 'desc')->paginate(10)->withQueryString() : Items::with('categories')->where('inventory', false)->orWhere('inventory', null)->orderBy('created_at', 'desc')->paginate(10)->withQueryString()
             'invoice' => (request('date_from') && request('date_to')) || request('order') ? $query->with('users')->get() : Orders::with('users')->orderBy('created_at', 'desc')->get(),
             'columns' => [

@@ -96,10 +96,11 @@ class ShippingController extends Controller
         return redirect()->route('shippings.index');
     }
 
-    public function destroy($id)
+    public function return($id)
     {
         $shipping = Shipping::find($id);
-        $shipping->delete();
-        return redirect()->route('shippings.index');
+        $shipping->status = 'مرتجع';
+        $shipping->save();
+        return redirect()->back();
     }
 }

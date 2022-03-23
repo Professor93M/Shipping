@@ -82,7 +82,6 @@ class ShippingController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd($request->all());
         $shipping = Shipping::find($id);
         $shipping->name = $request->name;
         $shipping->num = $request->num;
@@ -124,5 +123,13 @@ class ShippingController extends Controller
                 'created_at' => 'تاريخ الاضافة',
             ],
         ]);
+    }
+
+    public function back($id)
+    {
+        $shipping = Shipping::find($id);
+        $shipping->status = '';
+        $shipping->save();
+        return redirect()->back();
     }
 }

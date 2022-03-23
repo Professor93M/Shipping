@@ -71,7 +71,7 @@ class ShippingController extends Controller
 
     public function edit($id)
     {
-        $shipping = Shipping::find($id);
+        $shipping = Shipping::with('users')->where('id', $id)->get();
         return Inertia::render('Shippings/Edit', [
             'shipping' => $shipping,
             'agents' => User::where('pos', 'عميل')->get(),

@@ -21,7 +21,7 @@ const Create = (props) => {
         shipname: props.shipping[0].shipname || "",
         desc: props.shipping[0].desc || "",
         nameto: props.shipping[0].nameto || "",
-        agents_id: props.shipping[0].users.name || "",
+        agents_id: props.shipping[0].users.id || "",
         statuses_id: props.shipping[0].statuses.id || "",
         actions_id: props.shipping[0].actions.id || "",
         _method: "PUT",

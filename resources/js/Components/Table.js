@@ -10,17 +10,15 @@ import { Inertia } from "@inertiajs/inertia";
 
 const ReactTable = ({
     data,
-    user,
+    returned,
     cols,
     arabicCols,
     url,
-    drive,
     agent,
     admin,
-    unShow,
     show,
     paginate,
-    isAgent,
+    returnUrl,
 }) => {
     const columns = useMemo(
         () =>
@@ -42,7 +40,7 @@ const ReactTable = ({
         Inertia.get(`${url}/${index}`);
     };
     const handlePut = (index) => {
-        Inertia.put(`shipping/return/${index}`);
+        Inertia.put(`${returnUrl}/${index}`);
     };
 
     const tableHooks = (hooks) => {
@@ -51,16 +49,18 @@ const ReactTable = ({
     const tableHooks1 = (hooks) => {
         hooks.visibleColumns.push((columns) => [
             ...columns,
-            {
-                id: "edit",
-                Header: show ? "عرض" : "تعديل",
-                Cell: ({ row }) => (
-                    <FiSearch
-                        onClick={() => getEdit(row.values.id)}
-                        className="bg-green-400  mx-auto hover:bg-green-500 text-slate-200 w-8 h-8 p-1 rounded-md cursor-pointer "
-                    />
-                ),
-            },
+            !returned
+                ? {
+                      id: "edit",
+                      Header: show ? "عرض" : "تعديل",
+                      Cell: ({ row }) => (
+                          <FiSearch
+                              onClick={() => getEdit(row.values.id)}
+                              className="bg-green-400  mx-auto hover:bg-green-500 text-slate-200 w-8 h-8 p-1 rounded-md cursor-pointer "
+                          />
+                      ),
+                  }
+                : {},
 
             admin
                 ? {

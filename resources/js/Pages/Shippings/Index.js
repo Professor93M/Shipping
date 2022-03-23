@@ -8,7 +8,7 @@ import { AiOutlinePlusCircle } from "react-icons/ai";
 import { Link, useForm } from "@inertiajs/inertia-react";
 import moment from "moment";
 import { Inertia } from "@inertiajs/inertia";
-import { GrRefresh } from 'react-icons/gr';
+import { GrRefresh } from "react-icons/gr";
 const Index = ({ auth, errors, shippings, columns }) => {
     const { data, setData, get, processing, reset } = useForm({
         date_from: "",
@@ -17,11 +17,11 @@ const Index = ({ auth, errors, shippings, columns }) => {
 
     const [search, setSearch] = useState("");
 
-    const drive = auth.user.pos === "سائق"
+    const drive = auth.user.pos === "سائق";
 
-    const agent = auth.user.pos === "عميل"
+    const agent = auth.user.pos === "عميل";
 
-    const admin = auth.user.pos === "موظف" || auth.user.pos === "مدير"
+    const admin = auth.user.pos === "موظف" || auth.user.pos === "مدير";
 
     // const unShow =
     //     auth.user.pos === "مدير" ||
@@ -140,7 +140,10 @@ const Index = ({ auth, errors, shippings, columns }) => {
                                 handleChange={handleChange}
                             />
                         </div>
-                        <Link className="bg-primary-default rounded-full p-2" href="/shipping">
+                        <Link
+                            className="bg-primary-default rounded-full p-2"
+                            href="/shipping"
+                        >
                             <GrRefresh />
                         </Link>
                     </div>
@@ -159,6 +162,7 @@ const Index = ({ auth, errors, shippings, columns }) => {
                         agent={agent}
                         unShow
                         show
+                        returnUrl="shipping/return"
                     />
                 ) : (
                     <h3 className="text-center"> ليس لديك اوامر شحن بعد </h3>

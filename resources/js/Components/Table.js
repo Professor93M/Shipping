@@ -22,20 +22,18 @@ const ReactTable = ({
     paginate,
     isAgent,
 }) => {
-
     const columns = useMemo(
         () =>
             data[0]
                 ? Object.keys(data[0])
-                    .filter((key) => (cols.includes(key) ? key : null))
-                    .map((key) => ({
-                        Header: arabicCols[key],
-                        accessor: key,
-                    }))
+                      .filter((key) => (cols.includes(key) ? key : null))
+                      .map((key) => ({
+                          Header: arabicCols[key],
+                          accessor: key,
+                      }))
                 : [],
         [data, cols]
     );
-    console.log(agent);
     const isAccepted = (index) => {
         return index >= 1 === 0;
     };
@@ -47,38 +45,35 @@ const ReactTable = ({
         Inertia.put(`shipping/return/${index}`);
     };
 
-
     const tableHooks = (hooks) => {
+        hooks.visibleColumns.push((columns) => [...columns]);
+    };
+    const tableHooks1 = (hooks) => {
         hooks.visibleColumns.push((columns) => [
             ...columns,
             {
                 id: "edit",
                 Header: show ? "عرض" : "تعديل",
-                Cell: ({ row }) =>
-                    agent ? (
-                        <FiSearch
-                            onClick={() => getEdit(row.values.id)}
-                            className="bg-green-400  mx-auto hover:bg-green-500 text-slate-200 w-8 h-8 p-1 rounded-md cursor-pointer "
-                        />
-                    ) : (
-                        <BiEdit
-                            className="bg-green-400  mx-auto hover:bg-green-500 text-slate-200 w-8 h-8 p-1 rounded-md cursor-pointer "
-                            onClick={() => alert(row.values.id)}
-                        />
-                    ),
-            },
-
-
-            admin ? {
-                id: "delete",
-                Header: "ارجاع",
                 Cell: ({ row }) => (
-                    <FcDataBackup
-                        className="bg-red-400 mx-auto hover:bg-red-500 text-slate-200 w-8 h-8 p-1 rounded-md cursor-pointer "
-                        onClick={() => handlePut(row.values.id)}
+                    <FiSearch
+                        onClick={() => getEdit(row.values.id)}
+                        className="bg-green-400  mx-auto hover:bg-green-500 text-slate-200 w-8 h-8 p-1 rounded-md cursor-pointer "
                     />
                 ),
-            } : {},
+            },
+
+            admin
+                ? {
+                      id: "delete",
+                      Header: "ارجاع",
+                      Cell: ({ row }) => (
+                          <FcDataBackup
+                              className="bg-red-400 mx-auto hover:bg-red-500 text-slate-200 w-8 h-8 p-1 rounded-md cursor-pointer "
+                              onClick={() => handlePut(row.values.id)}
+                          />
+                      ),
+                  }
+                : {},
         ]);
     };
 
@@ -100,8 +95,7 @@ const ReactTable = ({
         state,
     } = useTable(
         { columns: columns, data: data },
-        admin || agent ? tableHooks : !unShow,
-        // useGlobalFilter,
+        admin || agent ? tableHooks1 : tableHooks, // useGlobalFilter,
         useSortBy,
         usePagination
     );

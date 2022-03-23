@@ -23,7 +23,7 @@ const Create = (props) => {
         post("/shipping/store");
     };
     const handleClick = () => {
-        Inertia.get("/");
+        history.back()
     };
     const handleChange = (event) => {
         setData(

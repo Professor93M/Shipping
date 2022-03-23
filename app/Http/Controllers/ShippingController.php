@@ -24,8 +24,14 @@ class ShippingController extends Controller
             $query = Shipping::query();
             $query = $query->where('users_id', request('id'));
         }
+
+        if(auth()->user()->pos == "عميل"){
+            $shipping = (request('date_from') && request('date_to')) || request('id') ? $query->with('users')->with('actions')->with('statuses')->where('users_id', auth()->user()->id)->get() : Shipping::with('users')->with('actions')->with('statuses')->where('users_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        }else{
+            $shipping = (request('date_from') && request('date_to')) || request('id') ? $query->with('users')->with('actions')->with('statuses')->get() : Shipping::with('users')->with('actions')->with('statuses')->orderBy('created_at', 'desc')->get();
+        }
         return Inertia::render('Shippings/Index', [
-            'shippings' => (request('date_from') && request('date_to')) || request('id') ? $query->with('users')->with('actions')->with('statuses')->get() : Shipping::with('users')->with('actions')->with('statuses')->orderBy('created_at', 'desc')->get(),
+            'shippings' => $shipping,
             'columns' => [
                 'id' => 'رقم الشحنة',
                 'name' => 'الاسم',

@@ -35,7 +35,7 @@ export default function Register({ auth }) {
     };
 
     const handleClick = () => {
-        Inertia.get("/");
+        history.back()
     };
 
     const poss = [

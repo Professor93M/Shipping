@@ -30,7 +30,7 @@ const Create = (props) => {
         post("/agents/store");
     };
     const handleClick = () => {
-        Inertia.get("/");
+        history.back()
     };
     const handleChange = (event) => {
         setData(

@@ -8,6 +8,7 @@ import { Link, useForm } from "@inertiajs/inertia-react";
 import moment from "moment";
 import { Inertia } from "@inertiajs/inertia";
 import Input from "@/Components/Input";
+import { GrRefresh } from 'react-icons/gr';
 
 const Index = ({ auth, errors, invoice, columns }) => {
     const { data, setData, get, processing, reset } = useForm({
@@ -58,7 +59,7 @@ const Index = ({ auth, errors, invoice, columns }) => {
 
     return (
         <Layout auth={auth} errors={errors} heading="الفواتير">
-            <div className="grid grid-cols-2">
+            <div className="grid grid-cols-1">
                 <div className="col-span-1 px-2">
                     <Link
                         href="/invoice/create"
@@ -69,53 +70,60 @@ const Index = ({ auth, errors, invoice, columns }) => {
                     </Link>
                 </div>
 
-                <div className=" px-2">
-                    <FormItem
-                        name="agents_id"
-                        type="text"
-                        label="رقم العميل"
-                        value={search}
-                        forInput="agents_id"
-                        required
-                        placeholder=" "
-                        handleChange={handleChange}
-                    />
-                </div>
-                <form onSubmit={submit} className=" col-span-2">
-                    <div className=" px-2 grid grid-cols-2 items-center gap-x-3">
-                        <div className="col-span-1 flex items-center  gap-x-8">
-                            <label htmlFor="date_from">من :</label>
-                            <Input
-                                type="date"
-                                name="date_from"
-                                value={data.date_from}
-                                className=" text-sm  text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-default focus:outline-none focus:ring-0 font-semibold focus:border-dark"
-                                handleChange={dateFilter}
-                            />
+                <div className="flex justify-around items-center mt-3">
+                    <form onSubmit={submit} className=" col-span-2">
+                        <div className=" px-2 flex items-center gap-x-3">
+                            <div className="col-span-1 flex items-center  gap-x-8">
+                                <label htmlFor="date_from">من :</label>
+                                <Input
+                                    type="date"
+                                    name="date_from"
+                                    value={data.date_from}
+                                    className=" text-sm  text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-default focus:outline-none focus:ring-0 font-semibold focus:border-dark"
+                                    handleChange={dateFilter}
+                                />
 
-                            <label htmlFor="date_from">الى :</label>
-                            <Input
-                                type="date"
-                                name="date_to"
-                                value={data.date_to}
-                                className=" text-sm  text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-default focus:outline-none focus:ring-0 font-semibold focus:border-dark"
-                                handleChange={dateFilter}
+                                <label htmlFor="date_from">الى :</label>
+                                <Input
+                                    type="date"
+                                    name="date_to"
+                                    value={data.date_to}
+                                    className=" text-sm  text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-default focus:outline-none focus:ring-0 font-semibold focus:border-dark"
+                                    handleChange={dateFilter}
+                                />
+                            </div>
+
+                            <div className="col-span-1">
+                                <Button
+                                    className="w-fit"
+                                    primary
+                                    processing={processing}
+                                >
+                                    بحث
+                                </Button>
+                            </div>
+                        </div>
+                    </form>
+                    <div className="flex justify-center items-center gap-x-4">
+                        <div className=" px-2">
+                            <FormItem
+                                name="agents_id"
+                                type="text"
+                                label="رقم العميل"
+                                value={search}
+                                forInput="agents_id"
+                                required
+                                placeholder=" "
+                                handleChange={handleChange}
                             />
                         </div>
-
-                        <div className="col-span-1">
-                            <Button
-                                className="w-fit"
-                                primary
-                                processing={processing}
-                            >
-                                بحث
-                            </Button>
-                        </div>
+                        <Link className="bg-primary-default rounded-full p-2" href="/invoice">
+                            <GrRefresh />
+                        </Link>
                     </div>
-                </form>
+                </div>
             </div>
-            <div className=" mt-10">
+            <div>
                 {tabledata.length > 0 ? (
                     <Table
                         data={tabledata}

@@ -43,7 +43,7 @@ const Create = (props) => {
         post("/invoice/store");
     };
     const handleClick = () => {
-        Inertia.get("/");
+        history.back()
     };
     const handleChange = (event, index) => {
         const inputs = [...data.items];

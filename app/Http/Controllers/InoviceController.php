@@ -23,9 +23,14 @@ class InoviceController extends Controller
             $query = Orders::query();
             $query = $query->where('users_id', request('id'));
         }
+
+        if(auth()->user()->pos == "عميل"){
+            $invoice = (request('date_from') && request('date_to')) || request('id') ? $query->with('users')->where('users_id', auth()->user()->id)->get() : Orders::with('users')->where('users_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        }else{
+            $invoice = (request('date_from') && request('date_to')) || request('id') ? $query->with('users')->get() : Orders::with('users')->orderBy('created_at', 'desc')->get();
+        }
         return Inertia::render('Invoice/Index', [
-            // 'items' => (request('date_from') && request('date_to')) || request('item') ? $query->with('categories')->where('inventory', false)->orWhere('inventory', null)->orderBy('created_at', 'desc')->paginate(10)->withQueryString() : Items::with('categories')->where('inventory', false)->orWhere('inventory', null)->orderBy('created_at', 'desc')->paginate(10)->withQueryString()
-            'invoice' => (request('date_from') && request('date_to')) || request('id') ? $query->with('users')->get() : Orders::with('users')->orderBy('created_at', 'desc')->get(),
+            'invoice' => $invoice,
             'columns' => [
                 'id' => 'رقم الفاتورة',
                 'totalprice' => 'مبلغ الفاتورة',
@@ -34,17 +39,6 @@ class InoviceController extends Controller
                 'created_at' => 'تاريخ الاضافة',
             ],
         ]);
-
-        // return Inertia::render('Invoice/Index',[
-        //     'invoice' => Orders::with('users')->get(),
-        //     'columns' => [
-        //         'id' => 'رقم الفاتورة',
-        //         'totalprice' => 'مبلغ الفاتورة',
-        //         'users_id' => 'العميل',
-        //         'status' => 'حالة الفاتورة',
-        //         'created_at' => 'تاريخ الاضافة',
-        //     ],
-        // ]);
     }
 
     public function create(){

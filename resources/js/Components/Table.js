@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { useSortBy, useTable, usePagination } from "react-table";
-import { BiEdit, BiTrash } from "react-icons/bi";
+import { BiEdit } from "react-icons/bi";
+import { FcDataBackup } from "react-icons/fc";
 import { useGlobalFilter } from "react-table/dist/react-table.development";
 import { FiSearch } from "react-icons/fi";
 import { Inertia } from "@inertiajs/inertia";
@@ -11,25 +12,30 @@ const ReactTable = ({
     data,
     user,
     cols,
-    unShow,
     arabicCols,
     url,
+    drive,
+    agent,
+    admin,
+    unShow,
     show,
     paginate,
+    isAgent,
 }) => {
+
     const columns = useMemo(
         () =>
             data[0]
                 ? Object.keys(data[0])
-                      .filter((key) => (cols.includes(key) ? key : null))
-                      .map((key) => ({
-                          Header: arabicCols[key],
-                          accessor: key,
-                      }))
+                    .filter((key) => (cols.includes(key) ? key : null))
+                    .map((key) => ({
+                        Header: arabicCols[key],
+                        accessor: key,
+                    }))
                 : [],
         [data, cols]
     );
-
+    console.log(agent);
     const isAccepted = (index) => {
         return index >= 1 === 0;
     };
@@ -37,6 +43,10 @@ const ReactTable = ({
     const getEdit = (index) => {
         Inertia.get(`${url}/${index}`);
     };
+    const handlePut = (index) => {
+        Inertia.put(`shipping/return/${index}`);
+    };
+
 
     const tableHooks = (hooks) => {
         hooks.visibleColumns.push((columns) => [
@@ -45,7 +55,7 @@ const ReactTable = ({
                 id: "edit",
                 Header: show ? "عرض" : "تعديل",
                 Cell: ({ row }) =>
-                    show ? (
+                    agent ? (
                         <FiSearch
                             onClick={() => getEdit(row.values.id)}
                             className="bg-green-400  mx-auto hover:bg-green-500 text-slate-200 w-8 h-8 p-1 rounded-md cursor-pointer "
@@ -57,16 +67,18 @@ const ReactTable = ({
                         />
                     ),
             },
-            // {
-            //     id: "delete",
-            //     Header: "حذف",
-            //     Cell: ({ row }) => (
-            //         <BiTrash
-            //             className="bg-red-400 mx-auto hover:bg-red-500 text-slate-200 w-8 h-8 p-1 rounded-md cursor-pointer "
-            //             onClick={() => alert(row.values.id)}
-            //         />
-            //     ),
-            // },
+
+
+            admin ? {
+                id: "delete",
+                Header: "ارجاع",
+                Cell: ({ row }) => (
+                    <FcDataBackup
+                        className="bg-red-400 mx-auto hover:bg-red-500 text-slate-200 w-8 h-8 p-1 rounded-md cursor-pointer "
+                        onClick={() => handlePut(row.values.id)}
+                    />
+                ),
+            } : {},
         ]);
     };
 
@@ -88,7 +100,7 @@ const ReactTable = ({
         state,
     } = useTable(
         { columns: columns, data: data },
-        !user && unShow && tableHooks,
+        admin || agent ? tableHooks : !unShow,
         // useGlobalFilter,
         useSortBy,
         usePagination
@@ -113,13 +125,13 @@ const ReactTable = ({
                             key={i}
                             className=""
                         >
-                            {headerGroup.headers.map((column) => (
+                            {headerGroup.headers.map((column, i) => (
                                 <th
                                     {...column.getHeaderProps(
                                         column.getSortByToggleProps()
                                     )}
                                     className="p-2"
-                                    key={column.id}
+                                    key={i}
                                 >
                                     <span className="p-2  flex justify-center items-center gap-x-2">
                                         {column.render("Header")}

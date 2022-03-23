@@ -27,64 +27,64 @@ const Sidebar = ({ auth }) => {
         <aside className="w-64" aria-label="Sidebar">
             <div className="overflow-y-auto py-4 pt-12 px-3 min-h-screen bg-white rounded dark:bg-gray-800">
                 <ul className="space-y-2">
+
+                    <li>
+                        <Link
+                            href="/"
+                            className="flex items-center p-2 w-full gap-x-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                        >
+                            <AiOutlineDashboard className="h-6 w-6 " />
+                            <span
+                                className="flex-1 ml-3 text-right whitespace-nowrap"
+                                sidebar-toggle-item=""
+                            >
+                                لوحة التحكم
+                            </span>
+                        </Link>
+                    </li>
+                    {auth.user.pos === "مدير" ? (
+                        <li>
+                            <button
+                                type="button"
+                                className="flex items-center p-2 w-full gap-x-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                                onClick={toggleUsers}
+                            >
+                                <FiUsers className="h-6 w-6 " />
+                                <span
+                                    className="flex-1 ml-3 text-right whitespace-nowrap"
+                                    sidebar-toggle-item=""
+                                >
+                                    الموظفين
+                                </span>
+                                <MdKeyboardArrowDown className="w-6 h-6" />
+                            </button>
+
+                            <ul
+                                id="a"
+                                className={` ${isOpenUsers ? "block" : "hidden"
+                                    } py-2 space-y-2`}
+                            >
+                                <li>
+                                    <Link
+                                        href="/users"
+                                        className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                                    >
+                                        إدارة الموظفين
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        href="/register"
+                                        className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                                    >
+                                        إضافة موظف
+                                    </Link>
+                                </li>
+                            </ul>
+                        </li>
+                    ) : null}
                     {show && (
                         <>
-                            <li>
-                                <Link
-                                    href="/"
-                                    className="flex items-center p-2 w-full gap-x-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                                >
-                                    <AiOutlineDashboard className="h-6 w-6 " />
-                                    <span
-                                        className="flex-1 ml-3 text-right whitespace-nowrap"
-                                        sidebar-toggle-item=""
-                                    >
-                                        لوحة التحكم
-                                    </span>
-                                </Link>
-                            </li>
-                            {auth.user.pos === "مدير" ? (
-                                <li>
-                                    <button
-                                        type="button"
-                                        className="flex items-center p-2 w-full gap-x-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                                        onClick={toggleUsers}
-                                    >
-                                        <FiUsers className="h-6 w-6 " />
-                                        <span
-                                            className="flex-1 ml-3 text-right whitespace-nowrap"
-                                            sidebar-toggle-item=""
-                                        >
-                                            الموظفين
-                                        </span>
-                                        <MdKeyboardArrowDown className="w-6 h-6" />
-                                    </button>
-
-                                    <ul
-                                        id="a"
-                                        className={` ${
-                                            isOpenUsers ? "block" : "hidden"
-                                        } py-2 space-y-2`}
-                                    >
-                                        <li>
-                                            <Link
-                                                href="/users"
-                                                className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                                            >
-                                                إدارة الموظفين
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link
-                                                href="/register"
-                                                className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                                            >
-                                                إضافة موظف
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                </li>
-                            ) : null}
                             <li>
                                 <button
                                     type="button"
@@ -103,9 +103,8 @@ const Sidebar = ({ auth }) => {
 
                                 <ul
                                     id="agents"
-                                    className={`py-2 space-y-2 ${
-                                        isOpenAgents ? "block" : "hidden"
-                                    } `}
+                                    className={`py-2 space-y-2 ${isOpenAgents ? "block" : "hidden"
+                                        } `}
                                 >
                                     <li>
                                         <Link
@@ -115,16 +114,14 @@ const Sidebar = ({ auth }) => {
                                             إدارة العملاء
                                         </Link>
                                     </li>
-                                    {auth.user.pos !== "مدير" ? (
-                                        <li>
-                                            <Link
-                                                href="/register"
-                                                className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                                            >
-                                                إضافة عميل
-                                            </Link>
-                                        </li>
-                                    ) : null}
+                                    <li>
+                                        <Link
+                                            href="/register"
+                                            className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                                        >
+                                            إضافة عميل
+                                        </Link>
+                                    </li>
                                 </ul>
                             </li>
                             <li>
@@ -144,9 +141,8 @@ const Sidebar = ({ auth }) => {
                                 </button>
                                 <ul
                                     id="invoices"
-                                    className={` ${
-                                        isOpenInvoice ? "block" : "hidden"
-                                    } py-2 space-y-2`}
+                                    className={` ${isOpenInvoice ? "block" : "hidden"
+                                        } py-2 space-y-2`}
                                 >
                                     <li>
                                         <Link
@@ -156,16 +152,14 @@ const Sidebar = ({ auth }) => {
                                             إدارة الفواتير
                                         </Link>
                                     </li>
-                                    {auth.user.pos !== "مدير" ? (
-                                        <li>
-                                            <Link
-                                                href="/invoice/create"
-                                                className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                                            >
-                                                إضافة فاتورة
-                                            </Link>
-                                        </li>
-                                    ) : null}
+                                    <li>
+                                        <Link
+                                            href="/invoice/create"
+                                            className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                                        >
+                                            إضافة فاتورة
+                                        </Link>
+                                    </li>
                                     <li>
                                         <Link
                                             href="/invoice/return"
@@ -195,9 +189,8 @@ const Sidebar = ({ auth }) => {
                         </button>
                         <ul
                             id="shippings"
-                            className={` ${
-                                isOpenShipping ? "block" : "hidden"
-                            } py-2 space-y-2`}
+                            className={` ${isOpenShipping ? "block" : "hidden"
+                                } py-2 space-y-2`}
                         >
                             <li>
                                 <Link
@@ -209,16 +202,14 @@ const Sidebar = ({ auth }) => {
                             </li>
                             {show && (
                                 <>
-                                    {auth.user.pos !== "مدير" ? (
-                                        <li>
-                                            <Link
-                                                href="/shipping/create"
-                                                className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                                            >
-                                                اضف امر شغل
-                                            </Link>
-                                        </li>
-                                    ) : null}
+                                    <li>
+                                        <Link
+                                            href="/shipping/create"
+                                            className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                                        >
+                                            اضف امر شغل
+                                        </Link>
+                                    </li>
                                     <li>
                                         <Link
                                             href="/status"

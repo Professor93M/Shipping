@@ -31,7 +31,6 @@ const Index = ({ auth, errors, agents, columns }) => {
                     <Table
                         data={data}
                         cols={cols}
-                        user
                         arabicCols={columns}
                         paginate
                     />

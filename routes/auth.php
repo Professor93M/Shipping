@@ -32,11 +32,6 @@ Route::middleware('auth')->group(function () {
     Route::get('invoice/create', [InoviceController::class, 'create'])
                 ->name('invoice.create');
     Route::post('invoice/store', [InoviceController::class, 'store']);
-    Route::get('invoice/show/{id}', [InoviceController::class, 'show'])
-                ->name('invoice.show');
-    Route::get('invoice/return', [InoviceController::class, 'return'])
-                ->name('invoice.return');
-    // Route::put('invoice/update/{id}', [InoviceController::class, 'update']);
 
     // AgentsController +++++++++++++++++++++++++++++++++++++++++++
     Route::get('agents', [AgentsController::class, 'index'])
@@ -62,10 +57,7 @@ Route::middleware('auth')->group(function () {
     Route::get('status', [StatusController::class, 'status'])
                 ->name('statuses.status');
     Route::get('status/create', [StatusController::class, 'create']);
-    Route::post('status/store', [StatusController::class, 'store']);
-    Route::get('status/edit/{id}', [StatusController::class, 'edit']);
-    Route::put('status/update/{id}', [StatusController::class, 'update']);
-    Route::delete('status/destroy/{id}', [StatusController::class, 'destroy']); 
+    Route::post('status/store', [StatusController::class, 'store']); 
     Route::get('status/settings', [StatusController::class, 'index'])
                 ->name('statuses.index');
 });

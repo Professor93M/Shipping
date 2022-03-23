@@ -26,9 +26,9 @@ class ShippingController extends Controller
         }
 
         if(auth()->user()->pos == "عميل"){
-            $shipping = (request('date_from') && request('date_to')) || request('id') ? $query->with('users')->with('actions')->with('statuses')->where('users_id', auth()->user()->id)->get() : Shipping::with('users')->with('actions')->with('statuses')->where('users_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
+            $shipping = (request('date_from') && request('date_to')) || request('id') ? $query->with('users')->with('actions')->with('statuses')->where('users_id', auth()->user()->id)->get() : Shipping::with('users')->with('actions')->with('statuses')->where('users_id', auth()->user()->id)->where('status', '!=', 'مرتجع')->orWhereNull('status')->orderBy('created_at', 'desc')->get();
         }else{
-            $shipping = (request('date_from') && request('date_to')) || request('id') ? $query->with('users')->with('actions')->with('statuses')->get() : Shipping::with('users')->with('actions')->with('statuses')->orderBy('created_at', 'desc')->get();
+            $shipping = (request('date_from') && request('date_to')) || request('id') ? $query->with('users')->with('actions')->with('statuses')->where('status', '!=', 'مرتجع')->orWhereNull('status')->get() : Shipping::with('users')->with('actions')->with('statuses')->where('status', '!=', 'مرتجع')->orWhereNull('status')->orderBy('created_at', 'desc')->get();
         }
         return Inertia::render('Shippings/Index', [
             'shippings' => $shipping,

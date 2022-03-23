@@ -68,29 +68,4 @@ class InoviceController extends Controller
         return Redirect::route('invoice.index');
     }
 
-    public function show($id){
-        return Inertia::render('Invoice/Show',[
-            'order' => Orders::findOrFail($id)->with('inovice')->first(),
-            // 'invoice' => Inovice::where('orders_id' ,$id)->get(),
-        ]);
-    }
-
-    public function destroy($id){
-        Orders::findOrFail($id)->delete();
-        return Redirect::route('invoice.index');
-    }
-
-    public function return(){
-        return Inertia::render('Invoice/Return', [
-            'invocie' => Orders::with('users')->where('status', 'مرتجع')->get(),
-            'columns' => [
-                'id' => 'رقم الفاتورة',
-                'totalprice' => 'مبلغ الفاتورة',
-                'users_id' => 'رقم العميل',
-                'status' => 'حالة الفاتورة',
-                'created_at' => 'تاريخ الاضافة',
-                'updated_at' => 'تاريخ الارجاع',
-            ]
-        ]);
-    }
 }

@@ -21,6 +21,7 @@ class Shipping extends Model
         'shipname',
         'shipdesc',
         'weight',
+        'status',
         'users_id',
         'statuses_id',
         'actions_id',

@@ -109,4 +109,19 @@ class ShippingController extends Controller
         $shipping->save();
         return redirect()->back();
     }
+
+    public function rindex(){
+        $shipping = Shipping::with('users')->where('status', 'مرتجع')->get();
+        return Inertia::render('Shippings/Rindex', [
+            'shippings' => $shipping,
+            'columns' => [
+                'id' => 'رقم الشحنة',
+                'name' => 'الاسم',
+                'num' => 'رقم الامر',
+                'users_id' => 'العميل',
+                'shipdate' => 'تاريخ الشحن',
+                'created_at' => 'تاريخ الاضافة',
+            ],
+        ]);
+    }
 }

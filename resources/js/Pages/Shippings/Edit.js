@@ -30,8 +30,8 @@ const Create = (props) => {
     const submit = (e) => {
         e.preventDefault();
 
-        // post(`/shipping/update/${props.shipping[0].id}`);
-        console.log(data);
+        post(`/shipping/update/${props.shipping[0].id}`);
+        // console.log(data);
     };
 
     const handleClick = () => {

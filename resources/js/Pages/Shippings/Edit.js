@@ -30,8 +30,7 @@ const Create = (props) => {
     const submit = (e) => {
         e.preventDefault();
 
-        // post(`/shipping/update/${props.shipping.id}`);
-        console.log(data);
+        post(`/shipping/update/${props.shipping.id}`);
     };
 
     const handleClick = () => {
@@ -46,49 +45,6 @@ const Create = (props) => {
                 : event.target.value
         );
     };
-
-    // const handleAction = (event) => {
-    //     const actionId = props.actions.filter((action) => {
-    //         if (action.name === event.target.value) {
-    //             return action.id;
-    //         }
-    //     });
-    //     setData({
-    //         ...data,
-    //         // agents_id: agentId[0].id,
-    //         // // statuses_id: statusesId[0].id,
-    //         actions_id: actionId[0].id,
-    //     });
-    // };
-    // const handleStatus = (event) => {
-    //     const statusesId = props.statuses.filter((status) => {
-    //         if (status.name === event.target.value) {
-    //             return status.id;
-    //         }
-    //     });
-
-    //     setData({
-    //         ...data,
-    //         // agents_id: agentId[0].id,
-    //         statuses_id: statusesId[0].id,
-    //         // actions_id: actionId[0].id,
-    //     });
-    // };
-
-    const getAction = data.actions_id
-        ? props.actions.filter((action) => {
-              if (action.id === data.actions_id) {
-                  return action.name;
-              }
-          })
-        : "الاجراء";
-    const getStatus = data.statuses_id
-        ? props.statuses.filter((status) => {
-              if (status.id === data.statuses_id) {
-                  return status.name;
-              }
-          })
-        : "الحالة";
 
     return (
         <Layout
@@ -280,7 +236,7 @@ const Create = (props) => {
                     )}
                 <div className="flex items-center justify-center gap-x-8 mt-4">
                     <Button primary processing={processing}>
-                        اضافة
+                        تحديث
                     </Button>
                     <Button type="button" handleClick={handleClick}>
                         رجوع

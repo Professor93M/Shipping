@@ -55,6 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::post('shipping/store', [ShippingController::class, 'store']);
     Route::get('shipping/edit/{id}', [ShippingController::class, 'edit']);
     Route::put('shipping/update/{id}', [ShippingController::class, 'update']);
+    Route::put('shipping/return/{id}', [ShippingController::class, 'return']);
 
     // StatusController +++++++++++++++++++++++++++++++++++++++++++
     Route::get('status', [StatusController::class, 'status'])

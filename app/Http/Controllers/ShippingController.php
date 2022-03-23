@@ -82,6 +82,7 @@ class ShippingController extends Controller
 
     public function update(Request $request, $id)
     {
+        dd($request->all());
         $shipping = Shipping::find($id);
         $shipping->name = $request->name;
         $shipping->num = $request->num;

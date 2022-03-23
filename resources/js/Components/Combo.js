@@ -12,6 +12,7 @@ export default function Button({
     placeholder,
     required,
     add,
+    edit,
 }) {
     return (
         <div className="flex flex-col items-center justify-center">
@@ -21,10 +22,14 @@ export default function Button({
                 name={name}
                 required={required}
                 onChange={handleChange}
-                defaultValue={placeholder}
+                defaultValue={placeholder ? placeholder : value}
             >
                 {add && (
-                    <option disabled className="disabled:bg-transparent">
+                    <option
+                        disabled
+                        value={placeholder}
+                        className="disabled:bg-transparent"
+                    >
                         {placeholder}
                     </option>
                 )}
@@ -33,7 +38,7 @@ export default function Button({
                     <option
                         key={index}
                         className="w-full text-base bg-transparent"
-                        value={option.name}
+                        value={edit ? option.id : option.name}
                         label={option.name}
                     >
                         {option.name}

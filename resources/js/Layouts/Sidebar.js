@@ -27,7 +27,6 @@ const Sidebar = ({ auth }) => {
         <aside className="w-64" aria-label="Sidebar">
             <div className="overflow-y-auto py-4 pt-12 px-3 min-h-screen bg-white rounded dark:bg-gray-800">
                 <ul className="space-y-2">
-
                     <li>
                         <Link
                             href="/"
@@ -61,8 +60,9 @@ const Sidebar = ({ auth }) => {
 
                             <ul
                                 id="a"
-                                className={` ${isOpenUsers ? "block" : "hidden"
-                                    } py-2 space-y-2`}
+                                className={` ${
+                                    isOpenUsers ? "block" : "hidden"
+                                } py-2 space-y-2`}
                             >
                                 <li>
                                     <Link
@@ -103,8 +103,9 @@ const Sidebar = ({ auth }) => {
 
                                 <ul
                                     id="agents"
-                                    className={`py-2 space-y-2 ${isOpenAgents ? "block" : "hidden"
-                                        } `}
+                                    className={`py-2 space-y-2 ${
+                                        isOpenAgents ? "block" : "hidden"
+                                    } `}
                                 >
                                     <li>
                                         <Link
@@ -141,8 +142,9 @@ const Sidebar = ({ auth }) => {
                                 </button>
                                 <ul
                                     id="invoices"
-                                    className={` ${isOpenInvoice ? "block" : "hidden"
-                                        } py-2 space-y-2`}
+                                    className={` ${
+                                        isOpenInvoice ? "block" : "hidden"
+                                    } py-2 space-y-2`}
                                 >
                                     <li>
                                         <Link
@@ -162,7 +164,7 @@ const Sidebar = ({ auth }) => {
                                     </li>
                                     <li>
                                         <Link
-                                            href="/invoice/return"
+                                            href="/shipping/return"
                                             className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                                         >
                                             الفواتير المرتجعة
@@ -189,8 +191,9 @@ const Sidebar = ({ auth }) => {
                         </button>
                         <ul
                             id="shippings"
-                            className={` ${isOpenShipping ? "block" : "hidden"
-                                } py-2 space-y-2`}
+                            className={` ${
+                                isOpenShipping ? "block" : "hidden"
+                            } py-2 space-y-2`}
                         >
                             <li>
                                 <Link

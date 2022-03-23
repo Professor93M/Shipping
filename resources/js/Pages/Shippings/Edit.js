@@ -8,31 +8,36 @@ import Button from "@/Components/Button";
 import { Inertia } from "@inertiajs/inertia";
 
 const Create = (props) => {
+    console.log(props);
     const { data, setData, post, processing, reset } = useForm({
-        name: props.shipping.name || "",
-        num: props.shipping.num || "",
-        address: props.shipping.address || "",
-        arvdate: props.shipping.arvdate || "",
-        shipdate: props.shipping.shipdate || "",
-        weight: props.shipping.weight || "",
-        mobile: props.shipping.mobile || "",
-        shipdesc: props.shipping.shipdesc || "",
-        shipname: props.shipping.shipname || "",
-        desc: props.shipping.desc || "",
-        nameto: props.shipping.nameto || "",
-        agents_id: props.agents[0].id || "",
+        name: props.shipping[0].name || "",
+        num: props.shipping[0].num || "",
+        address: props.shipping[0].address || "",
+        arvdate: props.shipping[0].arvdate || "",
+        shipdate: props.shipping[0].shipdate || "",
+        weight: props.shipping[0].weight || "",
+        mobile: props.shipping[0].mobile || "",
+        shipdesc: props.shipping[0].shipdesc || "",
+        shipname: props.shipping[0].shipname || "",
+        desc: props.shipping[0].desc || "",
+        nameto: props.shipping[0].nameto || "",
+        agents_id: props.shipping[0].users.name || "",
+        statuses_id: props.shipping[0].statuses.id || "",
+        actions_id: props.shipping[0].actions.id || "",
         _method: "PUT",
     });
 
     const submit = (e) => {
         e.preventDefault();
 
-        post(`/shipping/update/${props.shipping.id}`);
-        // console.log(data);
+        // post(`/shipping/update/${props.shipping.id}`);
+        console.log(data);
     };
+
     const handleClick = () => {
         Inertia.get("/");
     };
+
     const handleChange = (event) => {
         setData(
             event.target.name,
@@ -42,33 +47,48 @@ const Create = (props) => {
         );
     };
 
-    const handleAction = (event) => {
-        const actionId = props.actions.filter((action) => {
-            if (action.name === event.target.value) {
-                return action.id;
-            }
-        });
-        setData({
-            ...data,
-            // agents_id: agentId[0].id,
-            // // statuses_id: statusesId[0].id,
-            actions_id: actionId[0].id,
-        });
-    };
-    const handleStatus = (event) => {
-        const statusesId = props.statuses.filter((status) => {
-            if (status.name === event.target.value) {
-                return status.id;
-            }
-        });
+    // const handleAction = (event) => {
+    //     const actionId = props.actions.filter((action) => {
+    //         if (action.name === event.target.value) {
+    //             return action.id;
+    //         }
+    //     });
+    //     setData({
+    //         ...data,
+    //         // agents_id: agentId[0].id,
+    //         // // statuses_id: statusesId[0].id,
+    //         actions_id: actionId[0].id,
+    //     });
+    // };
+    // const handleStatus = (event) => {
+    //     const statusesId = props.statuses.filter((status) => {
+    //         if (status.name === event.target.value) {
+    //             return status.id;
+    //         }
+    //     });
 
-        setData({
-            ...data,
-            // agents_id: agentId[0].id,
-            statuses_id: statusesId[0].id,
-            // actions_id: actionId[0].id,
-        });
-    };
+    //     setData({
+    //         ...data,
+    //         // agents_id: agentId[0].id,
+    //         statuses_id: statusesId[0].id,
+    //         // actions_id: actionId[0].id,
+    //     });
+    // };
+
+    const getAction = data.actions_id
+        ? props.actions.filter((action) => {
+              if (action.id === data.actions_id) {
+                  return action.name;
+              }
+          })
+        : "الاجراء";
+    const getStatus = data.statuses_id
+        ? props.statuses.filter((status) => {
+              if (status.id === data.statuses_id) {
+                  return status.name;
+              }
+          })
+        : "الحالة";
 
     return (
         <Layout
@@ -85,11 +105,9 @@ const Create = (props) => {
                                     "block w-full text-sm  text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-default focus:outline-none focus:ring-0 font-semibold focus:border-dark peer"
                                 }
                                 name="statuses_id"
-                                add
                                 options={props.statuses}
-                                value={data.statuses_id}
-                                placeholder="الحالة"
-                                handleChange={(e) => handleStatus(e)}
+                                placeholder={data.statuses_id}
+                                handleChange={(e) => handleChange(e)}
                             />
                         </FormItem>
                     </div>
@@ -100,11 +118,9 @@ const Create = (props) => {
                                     "block w-full text-sm  text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-default focus:outline-none focus:ring-0 font-semibold focus:border-dark peer"
                                 }
                                 name="actions_id"
-                                add
                                 options={props.actions}
-                                value={data.actions_id}
-                                placeholder="الاجراء"
-                                handleChange={(e) => handleAction(e)}
+                                placeholder={data.actions_id}
+                                handleChange={(e) => handleChange(e)}
                             />
                         </FormItem>
                     </div>
@@ -178,11 +194,12 @@ const Create = (props) => {
                                             className={
                                                 "block w-full text-sm  text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-default focus:outline-none focus:ring-0 font-semibold focus:border-dark peer"
                                             }
-                                            name="agent_id"
-                                            // add
+                                            name="agents_id"
                                             options={props.agents}
-                                            value={data.agents_id}
-                                            placeholder="العميل"
+                                            placeholder={data.agents_id}
+                                            handleChange={(e) =>
+                                                handleChange(e)
+                                            }
                                         />
                                     </FormItem>
                                 </div>

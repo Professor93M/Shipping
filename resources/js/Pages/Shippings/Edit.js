@@ -30,7 +30,8 @@ const Create = (props) => {
     const submit = (e) => {
         e.preventDefault();
 
-        post(`/shipping/update/${props.shipping[0].id}`);
+        // post(`/shipping/update/${props.shipping[0].id}`);
+        console.log(data);
     };
 
     const handleClick = () => {
@@ -62,6 +63,7 @@ const Create = (props) => {
                                 }
                                 name="statuses_id"
                                 options={props.statuses}
+                                edit
                                 placeholder={data.statuses_id}
                                 handleChange={(e) => handleChange(e)}
                             />
@@ -74,6 +76,7 @@ const Create = (props) => {
                                     "block w-full text-sm  text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-default focus:outline-none focus:ring-0 font-semibold focus:border-dark peer"
                                 }
                                 name="actions_id"
+                                edit
                                 options={props.actions}
                                 placeholder={data.actions_id}
                                 handleChange={(e) => handleChange(e)}
@@ -153,6 +156,7 @@ const Create = (props) => {
                                             name="agents_id"
                                             options={props.agents}
                                             placeholder={data.agents_id}
+                                            edit
                                             handleChange={(e) =>
                                                 handleChange(e)
                                             }
